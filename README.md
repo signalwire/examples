@@ -4,6 +4,12 @@ Explore our guides and code examples.
 
 ### Explore by category
 
- - [Fax](./Fax)
- - [Video](./Video)
- - [Voice](./Voice)
+  [🖥 &nbsp; Video](./Video)
+  
+  [📞 &nbsp; Voice](./Voice)
+  
+  💬 &nbsp; Chat
+  
+  💬 &nbsp; SMS
+  
+  [📠 &nbsp; Fax](./Fax)  

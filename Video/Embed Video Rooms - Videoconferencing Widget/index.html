@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <h1>This is a static HTML page.</h1>
+    <p>Here is an embedded room:</p>
+
+    <div style="margin: 2em auto; width: 400px; height: 250px;">
+
+      <!-- SignalWire Video Room -->
+      <script>
+        !function(e,n,r){e[r]=e[r]||function(n={}){Object.assign(e[r].p=e[r].p||{},n)}
+        ;let t=n.currentScript;var o=n.createElement("script")
+        ;o.type="module",o.src="https://cdn.signalwire.com/video/rooms/index.js",
+        o.onload=function(){var o=n.createElement("ready-room")
+        ;o.params=e[r].p,t.parentNode.appendChild(o)},t.parentNode.insertBefore(o,t)
+        }(window,document,"swvr");
+
+        swvr({
+          token: 'vrm_0db8760cc10507194cb8bf47b581b4d8',  // Replace this with your own!
+          theme: 'light',
+          // userName: 'your-name'
+        });
+      </script>
+      <!-- End SignalWire Video Room -->
+
+    </div>
+
+  </body>
+</html>

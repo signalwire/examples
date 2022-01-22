@@ -1,0 +1,44 @@
+{
+  "bins": [
+    {
+      "name": "Call Forwarding",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Dial callerId='{{From}}'>xxx-xxx-xxxx</Dial>\n</Response>"
+    },
+    {
+      "name": "Voicemail Prompt",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Say>\n        Please leave a message with your name and number at the beep.\n        Press the pound key when finished.\n    </Say>\n    <Record\n        action='Path-To-Hangup-Bin'\n        maxLength=\"15\"\n        finishOnKey=\"#\"\n        />\n</Response>"
+    },
+     {
+       "name": "Hangup",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n  <Say> Thank you for your message. A member of our team will contact you shortly. Goodbye!</Say> \n  <Hangup/>\n</Response>"
+    },
+    {
+       "name": "Call Forwarding With Record",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Dial record=\"record-from-ringing\"\n          recordingStatusCallback=\"https://example.com/recording_status\">\n        <Number>+1xxxxxxxxxx</Number>\n    </Dial>\n</Response>"
+    },
+    {
+      "name": "Gather Input",
+      "content": "?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n<Gather action='path-to-voicemail-bin'  input='dtmf' timeout='5' numDigits=\"1\">\n<Say>Hello! Thanks for calling our Support line. If you would like to speak to an agent directly, please stay on the line. If you would like to leave a message and receive a callback, press any key now! </Say>\n</Gather>\n<Dial>+1xxxxxxx</Dial>\n</Response>"
+    },
+    {
+      "name": "Dial Conference",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n  <Dial>\n    <Conference>Room A1</Conference>\n  </Dial>\n</Response>"
+    },
+    {
+      "name": "Enqueue Caller",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Say> Thank you for calling Best Quality Vacuum. Ed Galbraith is currently unavailable or speaking with other customers. Please stay on the line to speak with one of his representatives. </Say>\n    <Enqueue>Best Quality Vacuum</Enqueue>\n</Response>"
+    },
+    {
+      "name": "Dial Queue",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Say>Connecting to caller...the next voice you hear will be the customer.</Say>\n    <Dial>\n        <Queue url=\"path-to-say-message-to-bridge-caller-bin\">Best Quality Vacuum</Queue>\n    </Dial>\n</Response>"
+    },
+    {
+      "name": "Say Message before Bridging Caller and Agent",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Say>This call will be recorded for quality control and training. You will now be connected to the next representative.</Say>\n</Response>"
+    },
+    {
+      "name": "Message Forwarding",
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<Response>\n\n    <Message to='+1xxxxxxxxxx'> You received a message from: {{From}}. The message is: \"{{Body}}\" </Message>\n\n</Response>"
+    }
+  ]
+}

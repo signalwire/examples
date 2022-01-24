@@ -1,0 +1,50 @@
+{
+  "main": {
+    "1": {
+      "verbiage": "If you'd like to connect to our Sales team, press 1",
+      "action": "/get_menu?menu=sales"
+    },
+    "2": {
+      "verbiage": "If you'd like to connect to our Support Engineering Team, press 2",
+      "action": "/get_menu?menu=tech"
+    }
+  },
+  "sales": {
+    "1": {
+      "verbiage": "If you are already a customer and would like to connect to your Account Executive, press 1",
+      "action": "/get_menu?menu=salesteam"
+    },
+    "2": {
+      "verbiage": "For assistance with a purchase or all other sales inquiries, press 2",
+      "action": "/dial_sales?name=general&group=sales_support"
+    }
+  },
+  "tech": {
+    "1": {
+      "verbiage": "If you are having a problem with SignalWire Work, press 1",
+      "action": "/dial_support?group=work_support"
+    },
+    "2": {
+      "verbiage": "If you are having a problem with SignalWire Cloud, press 2",
+      "action": "/dial_support?group=cloud_support"
+    },
+    "3": {
+      "verbiage": "If you are having a problem with SignalWire Stack, press 3",
+      "action": "/dial_support?group=stack_support"
+    }
+  },
+  "salesteam": {
+    "1": {
+      "verbiage": "If you would like to speak to Bob, press 1",
+      "action": "/dial_sales?name=bob&group=sale_partners"
+    },
+    "2": {
+      "verbiage": "If you would like to speak to Alice, press 2",
+      "action": "/dial_sales?name=alice&group=sale_partners"
+    },
+    "3": {
+      "verbiage": "If you would like to speak to Charlie, press 3",
+      "action": "/dial_sales?name=charlie&group=sale_partners"
+    }
+  }
+}

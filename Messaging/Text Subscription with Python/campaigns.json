@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "1",
+    "Name": "signalwire-demo-1",
+    "Phrases": [
+      "signalwire"
+    ],
+    "Subscribers": [
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "signalwire-demo-2",
+    "Phrases": [
+      "original"
+    ],
+    "Subscribers": [
+    ]
+  }
+]

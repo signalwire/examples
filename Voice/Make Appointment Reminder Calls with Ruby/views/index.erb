@@ -1,0 +1,19 @@
+<%- @reminders.each do |rm| %>
+  <%= rm['to'] %>
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= rm['name'] %></h5>
+    <div class="card-text">
+      <dl>
+        <dt>Number:</dt>
+        <dd><%= rm['to'] %></dd>
+        <dt>Date:</dt>
+        <dd><%= rm['date'] %></dd>
+        <dt>Time:</dt>
+        <dd><%= rm['time'] %></dd>
+      </dl>
+    </div>
+    <a href="/call" class="btn btn-primary">Confirm</a>
+  </div>
+</div>
+<% end %>

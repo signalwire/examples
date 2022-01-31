@@ -15,7 +15,7 @@ Additionally you will need a signalwire account which you can create [here](http
 To run the application, execute export FLASK_APP=app.py then run flask run.
 
 You can use this application as both an inbound or outbound survey. To use this script as an inbound survey, expose it to the web (through a server or SSH tunnel) and use it as a webhook for handling incoming calls under phone number settings. For this script, you would use the server url and the `/survey/welcome` route, like this `http://myServer.fakeserver.com/survey/welcome`.
-![Image](image1.png)
+![Image](https://github.com/signalwire/guides/blob/kguffey-mass-upload-patch-1/Voice/Phone%20Survey%20With%20Python/Image1.png?raw=true)
 You may need to use an SSH tunnel for testing this code if running on your local machine. – we recommend [ngrok](https://ngrok.com/). You can learn more about how to use ngrok [here](https://developer.signalwire.com/apis/docs/how-to-test-webhooks-with-ngrok). 
 
 

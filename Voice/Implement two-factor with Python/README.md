@@ -1,7 +1,7 @@
 # Overview
 By adding 2FA to your application, you can provide your users effective protection against many security threats that target user passwords and accounts. It will generate a One-Time Password to their phone number via voice call. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure! This guide uses the [Python SignalWire SDK](https://developer.signalwire.com/compatibility-api/reference/client-libraries-and-sdks#python) to show an example of how that can be done!
 
-#What do I need to run this code?
+# What do I need to run this code?
 Find the full code on Github [here](https://github.com/signalwire/snippets-voice-2-factor-auth)
 
 You will need a signalwire account which you can create [here](https://m.signalwire.com/signups/new?s=1). You will also need your SignalWire API credentials which you can find in the `API` tab of your SignalWire dashboard. For more information on navigating your SignalWire space check [here](https://developer.signalwire.com/apis/docs/navigating-your-space).
@@ -33,13 +33,13 @@ docker pull signalwire/snippets-voice-two-factor-auth:python
 ```
 (or)
 
-##Build your Own Docker Image
+## Build your Own Docker Image
 ```
 docker build -t snippets-voice-two-factor-auth
 ```
 (then)
 
-##Run your image
+## Run your image
 ```
 docker run --publish 5000:5000 --env-file .env snippets-voice-two-factor-auth
 ```

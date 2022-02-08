@@ -1,4 +1,4 @@
-#Overview
+# Overview
 This advanced example builds an application that implements a simple phone tree IVR with a few interesting features, including: 
 
 - Parallel dialing to multiple phone numbers
@@ -32,11 +32,11 @@ MAILGUN_DOMAIN=your-Mailgun-domain
 MAILGUN_API_KEY=your-Mailgun-api-key
 ```
 
-##Build and run via Docker
+## Build and run via Docker
 
 It is simpler to run the application via Docker, by first building the image with `docker build -t nodeivr .` followed by `docker run -it --rm -p 3000:3000 --name nodeivr --env-file .env nodeivr`.
 
-##Build and Run locally
+## Build and Run locally
 
 If you are running the application locally, first load the `.env` file with `set -o allexport; source .env; set +o allexport`, then run `npm install` followed by `npm start`.
 

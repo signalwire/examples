@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>URL Shortener</title>
+        <link rel="icon" type="image/x-icon" href="static/swlogo.jpg" />
+
+        <!-- Jquery CDN -->
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet"  type="text/css" href="{{url_for('static', filename='style.css')}}">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <style>
+
+            input, select {
+            width: 300px;
+            padding: 5px;
+            margin:15px;
+         }
+
+
+
+        </style>
+
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-lg-5">
+                <a class="navbar-brand" href="https://github.com/signalwire/guides">GH Repo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="https://signalwire.com/">SignalWire</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://developer.signalwire.com/">SignalWire Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content-->
+        <div class="wrapper d-flex align-items-stretch" >
+
+            <div class="col-sm-4" style="text-align: center; background:#eee; height: 100vh;">
+
+                            <h4>Generate a Shortened URL.</h4>
+                            <form action="/shortUrls" id="createShort" onsubmit="return validateForm()">
+                                <label for="createShortURL">
+                                    Enter a Full URL to Shorten:
+                                </label>
+                                <input type="text" id="createShortURL" name="fullURL">
+                                <br>
+
+                                <label for="useKeyword">
+                                    Enter an (optional) keyword:
+                                </label>
+                                <input type="text" id="useKeyword" name="keyword">
+                                <p>(https://example.com/<strong>keyword</strong>/abcd)</p>
+
+                                <input type="submit" value="Submit" style="background:#033ec3; color: white;">
+                            </form>
+
+                            <br>
+                            <br>
+                            <h4>Delete a Shortened URL</h4>
+                            <form action="/shortUrls">
+                                <label for="deleteShortURL">
+                                    Select the URL you would like to delete.
+                                </label>
+                                <br>
+                                <select id="deleteShortURL" name="delURL">
+                                       {% for url in urls %}
+                                            <option value="{{url}}">
+                                                {{ url }}
+                                            </option>
+                                        {% endfor %}
+                                </select>
+                                <br>
+                                <input type="submit" value="Submit" style="background:#033ec3; color: white;">
+                            </form>
+            </div>
+
+            <div class="col-md-8" style="background:#212529; height: 100vh;">
+                {{table | safe }}
+            </div>
+
+        </div>
+            <script type="text/javascript">
+            function validateForm(){
+
+            var url = document.forms["createShort"]['createShortUrl'];
+
+            if (url.value.trim().length == ''){
+            window.alert("Please enter a URL to generate a shortened version.")
+            url.focus();
+            return false;
+            }
+
+            return true;
+            }
+        </script>
+
+    </body>
+</html>

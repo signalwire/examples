@@ -1,0 +1,59 @@
+{ "settings": { "name": "Kevin's Contact Center", "outboundPhoneNumber": "--redacted--", "hostname": "http://--redacted--", "mainMenu": 
+    "main", "agentHuntMode": "Longest_Idle", "acceptedChannels": [ "voice", "sip" ], "enableRecording": false, "enableExitSurvey": false, 
+    "enableCallback": false, "enableInboundText": false, "enableTextSummary": false, "enableQueueStatsMessage": true, "enableExitMessage": 
+    false, "enableWaitingMusic": true, "enableWrapUpUrl": false, "wrapUpUrl": "/some/endpoint/to/handle/post/call/stuff", 
+    "wrapUpUrlMethod": "POST", "waitingMusics": [ "https://sinergyds.blob.core.windows.net/signalwire/popcorn.mp3" ], "agents": {
+      "0": { "name": "Kevin G.", "channels": { "sip": { "endpoint": "sip:--redacted--@--redacted--" }, "voice": { "endpoint": 
+          "--redacted--" }, "text": { "endpoint": "/some/url/to/process/this" }
+        },
+        "channelsEnabled": [ "voice", "sip" ], "roles": [], "skills": [ "english", { "desirability": 1, "proficiency": 1
+          },
+          "spanish", { "desirability": 0, "proficiency": 0
+          }
+        ]
+      },
+      "1": { "name": "Rick Sanchez", "channels": { "voice": { "endpoint": "--redacted--" }
+        },
+        "channelsEnabled": [], "roles": [], "skills": [ "english", { "desirability": 1, "proficiency": 1
+          },
+          "spanish", { "desirability": 0, "proficiency": 0
+          }
+        ]
+      },
+      "2": { "name": "Marty McFly", "channels": { "voice": { "endpoint": "--redacted--" }
+        },
+        "channelsEnabled": [], "roles": [], "skills": [ "english", { "desirability": 1, "proficiency": 1
+          },
+          "spanish", { "desirability": 1, "proficiency": 1
+          }
+        ]
+      }
+    },
+    "queues": { "salesPartners": { "queueSid": "--redacted--" }, "salesSupport": { "queueSid": "--redacted--" }, "techSupport": { 
+      "queueSid": "--redacted--" }
+    },
+    "messages": { "queueStatsMessage": "You are position ... %QueuePosition% ... of ...%CurrentQueueSize% ... Callers with an average wait 
+      time of ...%AvgQueueTime% ... seconds. Thank you for holding.", "entryMessage": "Thank You For Calling Kevin's Excellent Call 
+      Center!!", "exitMessage": "Thank You For Calling! The real O Gs.. Original Geeks!  Remember you can reach us on the web at 
+      signalwire dot com"
+    },
+    "menus": { "main": { "1": { "verbiage": "For Sales, Press 1", "action": "/get_menu?menu=sales"
+        },
+        "2": { "verbiage": "For Tech Support, Press 2", "action": "/get_menu?menu=tech"
+        }
+      },
+      "sales": { "1": { "verbiage": "For Partners, Press 1", "action": "/enter_queue?name=salesPartners"
+        },
+        "2": { "verbiage": "For Help With Your Purchase, Press 2", "action": "/enter_queue?name=salesSupport"
+        }
+      },
+      "tech": { "1": { "verbiage": "For issues with your internet, press 1", "action": "/enter_queue?name=techSupport"
+        },
+        "2": { "verbiage": "For issues with your cell phone, press 2", "action": "/get_voicemail?group=mobileSupport"
+        }
+      }
+    }
+  },
+  "signalwire": { "space": "", "project": "", "token":""
+  }
+}

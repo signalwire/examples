@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <%- if @verify %>
+    <div class="col-6 me-auto ms-auto">
+      <h2>Verify</h2>
+      <form method="POST">
+        <div class="mb-3">
+          <label for="phone" class="form-label">Enter your six digit code:</label>
+          <input type="text" id="code" name="code" class="form-control">
+          <input type="hidden" id="verify" name="verify" value="<%= @verify %>">
+          <div class="form-text"><%= @verify %></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <%- if @success != nil %>
+      <div>
+        Result: <% if @success %> <span class="badge bg-success rounded-pill">Verified!</span> <% else %> <span class="badge bg-danger rounded-pill">Failed!</span> <% end %>
+      </div>
+      <% end %>
+    </div>
+    <% else %>
+    <div class="col-6 me-auto ms-auto">
+      <h2>Request</h2>
+      <form method="POST">
+        <div class="mb-3">
+          <label for="phone" class="form-label">Enter your phone number:</label>
+          <input type="tel" id="phone" name="phone" pattern="+1[0-9]{10}" required aria-describedby="phoneHelp" class="form-control">
+          <div id="phoneHelp" class="form-text">Format: +1123456789</div>
+        </div>
+        <div class="mb-3">
+          <label for="mode" class="form-label">Select mode:</label>
+          <select name="mode" id="mode" class="form-select">
+            <option value="sms">Text</option>
+            <option value="call">Voice</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+    <% end %>
+  </div>
+</div>

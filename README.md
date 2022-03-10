@@ -10,6 +10,6 @@ Explore our guides and code examples.
   
 &nbsp;&nbsp; 💬 &nbsp; Chat
   
-&nbsp;&nbsp; 💬 &nbsp; SMS
+&nbsp;&nbsp; [💬 &nbsp; Messaging](./Messaging)
   
 &nbsp;&nbsp; [📠 &nbsp; Fax](./Fax)  

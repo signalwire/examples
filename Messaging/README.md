@@ -1,4 +1,4 @@
-# Fax Guides
+# Messaging Guides
 
 [Private URL Shortener - Python](./Private-URL-Shortener-Python)  
 This application shows how easy it is to set up your own private URL shortener allowing you to generate and redirect shortened URLs, keep track of their usage, and most importantly you will be following all of the carrier rules regarding shortened URLs.

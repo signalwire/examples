@@ -8,3 +8,7 @@ Develop a simple full stack video demo with this step-by-step walk-through.
 
 [Room Previews using Programmable Video Communication](./Room%20Preview%20Demo)
 Very simple demonstration of getting and refreshing Room Previews.
+
+[Layout Positions](./Layout-Positions)  
+This guide shows how to control positions and layouts in a video room.
+

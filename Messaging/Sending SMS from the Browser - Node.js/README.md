@@ -1,4 +1,4 @@
-# Send SMS with SignalWire Messaging API
+# Send SMS from the browser with SignalWire APIs - Node JS
 
 A demo application that demonstrates how to send an SMS message using the SignalWire Messaging API.
 

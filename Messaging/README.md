@@ -12,5 +12,5 @@ This guide will show you how to create a phrase-based subscription service using
 [Two Factor Authentication via SMS - Python](./Two%20Factor%20Authentication%20via%20SMS%20-%20Python)  
 This application will generate a One-Time Password that is sent to the recipient's phone number via SMS. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure!
 
-[Send SMS with RealTime API](./Send%20SMS%20with%20RealTime%20API)
+[Sending SMS from the Browser - Node.js](./Sending%20SMS%20from%20the%20Browser%20-%20Node.js)
 This sample application in Node.js creates a simple server with Express.js and uses the RealTime API to allow users to send SMS.

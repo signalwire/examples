@@ -6,5 +6,5 @@ To run this demo locally, make necessary adjustments ot the env.example file and
 
 Once you have made the adjustments, install the dependencies using `yarn install` and then start it via `yarn dev`.
 
-This sample code is explained in detail in the guide [Get Thumbnails for your Video Calls](https://developer.signalwire.com/apis/docs/get-thumbnails-for-your-video-calls)
+This sample code is explained in detail in the guide 📖 [Get Thumbnails for your Video Calls](https://developer.signalwire.com/apis/docs/get-thumbnails-for-your-video-calls)
 at SignalWire Developer Portal.

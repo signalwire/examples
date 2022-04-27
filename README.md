@@ -7,6 +7,8 @@ Explore our guides and code examples.
 &nbsp;&nbsp; [🖥 &nbsp; Video](./Video)
   
 &nbsp;&nbsp; [📞 &nbsp; Voice](./Voice)
+
+&nbsp;&nbsp; [📞 &nbsp; Phone Numbers](./PhoneNumbers)
   
 &nbsp;&nbsp; 💬 &nbsp; Chat
   

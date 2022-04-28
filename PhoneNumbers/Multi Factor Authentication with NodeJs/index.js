@@ -25,6 +25,7 @@ const port = 3000
 
 app.use(express.static('frontend'))
 
+// Endpoint used in the front-end to send SMS
 app.post('/api/send-sms', (req, res) => {
 
     const {phoneNumber} = req.body
@@ -46,6 +47,7 @@ app.post('/api/send-sms', (req, res) => {
 
 })
 
+// Endpoint used in the frontend for voice
 app.post('/api/voice', (req, res) => {
     const {phoneNumber} = req.body
 
@@ -66,6 +68,7 @@ app.post('/api/voice', (req, res) => {
     })
 })
 
+// Endpoint used to verify the token provided by the user
 app.post('/api/token', (req, res) => {
 
     const {token} = req.body

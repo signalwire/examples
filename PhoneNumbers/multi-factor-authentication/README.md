@@ -2,6 +2,8 @@
 
 This guide will use the Express Framework to create a simple web application that uses the SignalWire MFA API to authenticate a user via sms or voice call.
 
+📖 [Read the full guide](https://developer.signalwire.com/apis/docs/multi-factor-authentication-2)
+
 # What do I need to run this code?
 
 - Basic understanding of the Javascript framework

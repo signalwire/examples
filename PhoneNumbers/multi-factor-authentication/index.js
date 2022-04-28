@@ -9,10 +9,10 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
-const spaceName = process.env.SPACE_NAME
+const spaceUrl = process.env.SPACE_URL
 
-const apiUrl = `https://${spaceName}.signalwire.com/api/relay/rest/mfa/sms`
-const voiceUrl = `https://${spaceName}.signalwire.com/api/relay/rest/mfa/call`
+const apiUrl = `https://${spaceUrl}/api/relay/rest/mfa/sms`
+const voiceUrl = `https://${spaceUrl}/api/relay/rest/mfa/call`
 
 let sid = ""
 
@@ -70,7 +70,7 @@ app.post('/api/token', (req, res) => {
 
     const {token} = req.body
 
-    const mfaUrl =  `https://${spaceName}.signalwire.com/api/relay/rest/mfa/${sid}/verify`
+    const mfaUrl =  `https://${spaceUrl}/api/relay/rest/mfa/${sid}/verify`
     axios.post(mfaUrl, {token:token}, {auth}).then(response => {
         return res.json({"message": "Token verified successfully", "data": response.data, "status": 200})
     }, error=> {

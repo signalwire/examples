@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@signalwire/js": "^3.10.2",
-    "@signalwire/node": "^2.4.0",
     "axios": "^0.26.1",
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",

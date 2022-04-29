@@ -1,0 +1,15 @@
+{
+  "name": "signalwire-api-messaging",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "@signalwire/node": "^2.4.0"
+  }
+}

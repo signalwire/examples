@@ -2,6 +2,8 @@
 
 This project makes use of SignalWire Compatibility API and NodeJs SDK to make voice call and send sms on Azure function using the HttpTrigger function.
 
+📖 [Read the full guide](https://developer.signalwire.com/apis/docs/microsoft-azure-functions)
+
 # How to Run Application
 
 Follow the below steps to get started with this project.

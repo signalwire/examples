@@ -1,6 +1,8 @@
 # Overview
 This guide will use <stream> and websockets to recieve base64 audio, which can be written to an audio file for storage, playback, or further manipulation such as transcription services. This guide will focus on taking inbound and outbound audio tracks from a call and saving them to a Wave file.
 
+📖 [Read the full guide](https://developer.signalwire.com/apis/docs/utilizing-websockets-and-call-streams)
+
 # What do I need?
 
 If you are running Python 3.10, the only package you should have to install is [PyWav](https://pypi.org/project/pywav/). If you are running older versions of Python, you may also have to install [websockets](https://pypi.org/project/websockets/) / [asyncio](https://pypi.org/project/asyncio/)
@@ -118,9 +120,9 @@ Doing this will allow us to hear the opposite leg of the call, such as the audio
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Start>
-     <Stream url="wss://8dd4-2601-5c2-4400-3a90-bdea-cd5a-e3f9-fde3.ngrok.io" track="outbound_track" />
-  </Start>
-<say>Congratulations, this is the outbound audio stream</say>
+    <Start>
+        <Stream url="wss://8dd4-2601-5c2-4400-3a90-bdea-cd5a-e3f9-fde3.ngrok.io" track="outbound_track" />
+    </Start>
+    <say>Congratulations, this is the outbound audio stream</say>
 </Response>
 ```

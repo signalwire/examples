@@ -15,3 +15,5 @@ Explore our guides and code examples.
 &nbsp;&nbsp; [💬 &nbsp; Messaging](./Messaging)
   
 &nbsp;&nbsp; [📠 &nbsp; Fax](./Fax)  
+
+&nbsp;&nbsp; [🔌 &nbsp; Integrations](./Integrations)

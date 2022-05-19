@@ -2,6 +2,8 @@
 
 A demo application that demonstrates how to send an SMS message using the SignalWire Messaging API.
 
+📖 [Read the full guide](https://developer.signalwire.com/apis/docs/send-sms-from-the-browser-using-node-js)
+
 ## Setup
 
 1. Use `yarn install` to install the dependencies.

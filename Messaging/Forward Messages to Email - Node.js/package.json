@@ -1,0 +1,17 @@
+{
+    "name": "smstoemail",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "dependencies": {
+        "@signalwire/realtime-api": "^3.0.0",
+        "body-parser": "^1.20.0",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "is-e164-phone-number": "^1.0.0"
+    }
+}

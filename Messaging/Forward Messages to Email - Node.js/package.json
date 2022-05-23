@@ -9,10 +9,10 @@
     },
     "dependencies": {
         "@signalwire/realtime-api": "^3.0.0",
-        "axios": "^0.27.2",
         "body-parser": "^1.20.0",
         "dotenv": "^16.0.0",
         "express": "^4.17.3",
-        "is-e164-phone-number": "^1.0.0"
+        "form-data": "^4.0.0",
+        "mailgun.js": "^7.0.0"
     }
 }

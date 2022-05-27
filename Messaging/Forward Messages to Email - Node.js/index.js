@@ -1,6 +1,5 @@
 require("dotenv").config();
-let sw = require("@signalwire/realtime-api");
-let Messaging = sw.Messaging;
+let { Messaging } = require("@signalwire/realtime-api");
 let formData = require("form-data");
 let mailgun = require("mailgun.js");
 

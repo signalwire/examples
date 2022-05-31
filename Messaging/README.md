@@ -1,5 +1,8 @@
 # Messaging Guides
 
+[Forward Messages to Email - Node.js](./Forward%20Messages%20to%20Email%20-%20Node.js)  
+This super simple guide will show how you can handle incoming messages and forward them to an email address. We will use the SignalWire Javascript SDK to handle the incoming message and MailGun API to send an email.
+
 [Private URL Shortener - Python](./Private-URL-Shortener-Python)  
 This application shows how easy it is to set up your own private URL shortener allowing you to generate and redirect shortened URLs, keep track of their usage, and most importantly you will be following all of the carrier rules regarding shortened URLs.
 

@@ -1,0 +1,16 @@
+{
+  "name": "two-factor-authentication-via-sms---node",
+  "version": "1.0.0",
+  "description": "Two Factor Authentication (2FA) can provide your users effective protection against many security threats that target user passwords and accounts. This application will generate a one-time password that is sent to the recipient's phone number via SMS. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@signalwire/realtime-api": "^3.0.2",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}

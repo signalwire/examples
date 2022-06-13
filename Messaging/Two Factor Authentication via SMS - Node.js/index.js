@@ -29,10 +29,9 @@ const requestAuth = async (req, res) => {
     const min = Math.ceil(123456);
     const max = Math.floor(987654);
     const code = Math.floor(Math.random() * (max - min + 1) + min);
+
     //check for for proper E.164 format
     const number = req.body.number;
-    console.log(code)
-    console.log(number)
     if (!validatePhoneForE164(number))
         return res.status(400).send("Invalid Phone Number")
 
@@ -58,11 +57,15 @@ const requestAuth = async (req, res) => {
 
 const validateAuth = (req, res) => {
     const code = req.body.auth_code;
-    const number = "+" + req.body.number;
+    const number = req.body.number;
+    if (!validatePhoneForE164(number))
+        return res.status(400).send("Invalid Phone Number")
 
     const requestCount = data.requests.length;
-    data.requests = data.requests.filter((s) => s.number === number && s.code === code);
+    data.requests = data.requests.filter((s) => {
 
+        !(s.number === number && s.code === code)
+    })
     //If the request was filtered out, the auth code matched and we return 200
     //If nothing was filtered out, no match was found and we return 403
     return requestCount === data.requests.length ?

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Two Factor Auth via SMS with SignalWire RealTime API</title>
+  <link rel="stylesheet" media="all" href="index.css" />
+</head>
+
+<body>
+  <div class="body">
+    <form method="POST" action="/request-auth">
+      <h1>Request a One-time Authentication Code</h1>
+      <label>Phone Number</label>
+      <input type="tel" placeholder="E.164 phone number (e.g. +19991234567)" name="number" />
+      <button>Request Code</button>
+    </form>
+  </div>
+  <div class="body">
+    <form method="POST" action="/validate-auth">
+      <h1>Validate with Your Authentication Code</h1>
+      <label>Phone Number</label>
+      <input type="input" placeholder="E.164 phone number (e.g. +19991234567)" name="number" />
+      <label>Authentication Code</label>
+      <input type="input" placeholder="6-digit code from the SMS" name="code" />
+      <button>Authenticate</button>
+    </form>
+  </div>
+</body>
+
+</html>

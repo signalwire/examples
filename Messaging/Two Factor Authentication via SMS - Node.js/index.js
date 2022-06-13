@@ -7,9 +7,16 @@ const port = 3000;
 const bodyparser = require("body-parser");
 
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use("/", express.static("html"));
 
 //Global variable to store challenge sessions
 const data = { requests: [] };
+
+function validatePhoneForE164(phoneNumber) {
+    const regEx = /^\+[1-9]\d{10,14}$/;
+
+    return regEx.test(phoneNumber);
+};
 
 const requestAuth = async (req, res) => {
     const authClient = new Messaging.Client({
@@ -18,14 +25,17 @@ const requestAuth = async (req, res) => {
         contexts: ["auth"]
     });
 
-    //Generate a random 6 digit code between 123456 - 987654
+    //Generate a random 6 digit code between 123456 - 987654, inclusive
     const min = Math.ceil(123456);
     const max = Math.floor(987654);
     const code = Math.floor(Math.random() * (max - min + 1) + min);
-
-    const number = "+" + req.query.number;
+    //check for for proper E.164 format
+    const number = req.body.number;
     console.log(code)
     console.log(number)
+    if (!validatePhoneForE164(number))
+        return res.status(400).send("Invalid Phone Number")
+
     data.requests.push({
         number,
         code
@@ -39,16 +49,16 @@ const requestAuth = async (req, res) => {
         });
 
         console.log(status);
-        return res.status(200);
+        return res.status(200).send("Your code was sent");
     } catch (e) {
         console.error(e);
-        return res.status(500);
+        return res.status(500).send("Error sending code via SMS");
     }
-}
+};
 
 const validateAuth = (req, res) => {
-    const code = req.query.auth_code;
-    const number = "+" + req.query.number;
+    const code = req.body.auth_code;
+    const number = "+" + req.body.number;
 
     const requestCount = data.requests.length;
     data.requests = data.requests.filter((s) => s.number === number && s.code === code);
@@ -58,16 +68,10 @@ const validateAuth = (req, res) => {
     return requestCount === data.requests.length ?
         res.status(403).send("Forbidden") :
         res.status(200).send("Success!");
-}
+};
 
 app.post("/request-auth", requestAuth);
-app.get("/request-auth", requestAuth);
 app.post("/validate-auth", validateAuth);
-app.get("/validate-auth", validateAuth);
-
-app.get("/", (req, res) => {
-    res.send("Hello World!")
-});
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

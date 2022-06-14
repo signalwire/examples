@@ -15,19 +15,21 @@ You will need a SignalWire phone number as well as your API Credentials (API Tok
 
 ## How to Run Application
 
+Start by copying the example.env to a new file, copying in credentials from your SignalWire Space, and saving the new file as `.env`.
+
 ### Build and Run on Docker
 
-Build your own image with `docker build -t snippets-text-two-factor-auth .`
+Build your own image with `docker build -t sms-two-factor-auth .`
 
-Run your image with `docker run --publish 5000:5000 --env-file .env snippets-text-two-factor-auth`
+Run your image with `docker run --publish 5000:3000 --env-file .env sms-two-factor-auth`
 
-The application will run on port 5000
+The application will run on port 5000.
 
 <br/>
 
 ### Build and Run Natively
 
-
+Clone the repo and run `yarn start` or `npm start` from the command line.
 
 <br/>
 

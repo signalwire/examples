@@ -4,7 +4,9 @@
   "description": "Two Factor Authentication (2FA) can provide your users effective protection against many security threats that target user passwords and accounts. This application will generate a one-time password that is sent to the recipient's phone number via SMS. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

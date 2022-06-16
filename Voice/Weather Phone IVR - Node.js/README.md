@@ -4,7 +4,11 @@
 
 This code sample is a simple weather phone IVR application that uses the [SignalWire Realtime API](https://developer.signalwire.com/client-sdk/reference/rt-exports) to provide current weather report to the caller in Washington DC either as a phone call or text.
 
-## To run this sample
+### 📞 Dial [+17712093222](tel:+17712093222) ☎ for a **live demo** of this code.
+
+---
+
+### To run this sample
 
 1. Fill in the Project ID and the API token from your SignalWire dashboard in the `.env.sample` file.
 2. Buy a number from the SignalWire Dashboard, configure it to use Relay with context `office`.

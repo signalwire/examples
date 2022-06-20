@@ -1,8 +1,9 @@
 require("dotenv").config();
 const parsePhoneNumber = require("libphonenumber-js");
+
 const axios = require("axios");
-let sw = require("@signalwire/realtime-api");
-let { Voice, Messaging } = sw;
+const sw = require("@signalwire/realtime-api");
+const { Voice, Messaging } = sw;
 
 const DC_WEATHER_PHONE = "+12025891212";
 const PHONE_NUMBER = process.env.PHONE_NUMBER;
@@ -22,7 +23,7 @@ voiceClient.on("call.received", async (call) => {
   await call.answer();
   console.log("Inbound call answered");
   try {
-    let welcome = await call.playTTS({
+    const welcome = await call.playTTS({
       text: "Hello! Welcome to Knee Rub's Weather Helpline.",
       gender: "male",
     });
@@ -30,6 +31,8 @@ voiceClient.on("call.received", async (call) => {
     console.log("Welcome text said");
 
     let digits, terminator, type;
+
+    // Prompt user to dial a digit
     const cmdPrompt = await call.promptTTS({
       text: "Please enter 1 for Washington weather, 2 for washington weather message, 3 to play rain dance, 4 to send rain dance",
       digits: {
@@ -37,7 +40,7 @@ voiceClient.on("call.received", async (call) => {
         digitTimeout: 15,
       },
     });
-    let cmdResult = await cmdPrompt.waitForResult();
+    const cmdResult = await cmdPrompt.waitForResult();
     type = cmdResult.type;
     digits = cmdResult.digits;
     terminator = cmdResult.terminator;
@@ -49,6 +52,8 @@ voiceClient.on("call.received", async (call) => {
     );
 
     if (digits === "1") {
+      // User input 1.  We are going to dial a Washington weather
+      // number and connect the call.
       await call.connectPhone({
         from: call.from,
         to: DC_WEATHER_PHONE,
@@ -63,10 +68,12 @@ voiceClient.on("call.received", async (call) => {
       await call.waitUntilConnected();
       console.log("Connected");
     } else if (digits === "2") {
-      let place = "Washington DC";
+      // User input 2.  We are going to query a weather API, find the weather of Washington,
+      // and message that weather to the user's number.
+      const place = "Washington DC";
       console.log(`Sending message about weather of ${place}`);
-      let weather = await getWeatherFromOpenWeatherMap(place);
-      let message = `${place} weather: ${
+      const weather = await getWeatherFromOpenWeatherMap(place);
+      const message = `${place} weather: ${
         weather.weather[0].description
       }. Temperature: ${(weather.main.temp - 273).toFixed(2)}°C`;
       console.log(message, "being sent to number", call.to);
@@ -77,7 +84,7 @@ voiceClient.on("call.received", async (call) => {
           body: message,
         });
       } catch (e) {
-        let pb = await call.playTTS({
+        const pb = await call.playTTS({
           text:
             "Sorry, I couldn't send the message." +
             (e?.data?.from_number[0] ?? " ") +
@@ -87,12 +94,14 @@ voiceClient.on("call.received", async (call) => {
         await pb.waitForEnded();
       }
     } else if (digits === "3") {
+      //User input 3.  We are going to play a rain dance song hosted on our servers.
       console.log("Sending rain dance song");
       const rainDance = await call.playAudio({
         url: "https://swrooms.com/rain.mp3",
       });
       await rainDance.waitForEnded();
     } else if (digits === "4") {
+      //User input 4.  We are going to ask for a phone number to dial and play a rain dance song to it.
       console.log("Sending rain song to your friend");
       const prompt = await call.promptTTS({
         text: "Please enter your friend's number then dial #. Please use the international format, but skip the plus sign.",
@@ -141,7 +150,7 @@ voiceClient.on("call.received", async (call) => {
 async function callWithRainDance(number) {
   try {
     console.log("Sending Call");
-    let call = await voiceClient.dialPhone({
+    const call = await voiceClient.dialPhone({
       from: PHONE_NUMBER,
       to: number,
       timeout: 30,

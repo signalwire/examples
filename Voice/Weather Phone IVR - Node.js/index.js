@@ -2,8 +2,7 @@ require("dotenv").config();
 const parsePhoneNumber = require("libphonenumber-js");
 
 const axios = require("axios");
-const sw = require("@signalwire/realtime-api");
-const { Voice, Messaging } = sw;
+const { Voice, Messaging } = require("@signalwire/realtime-api");
 
 const DC_WEATHER_PHONE = "+12025891212";
 const PHONE_NUMBER = process.env.PHONE_NUMBER;

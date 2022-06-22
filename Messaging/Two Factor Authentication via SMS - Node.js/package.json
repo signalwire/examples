@@ -13,6 +13,7 @@
   "dependencies": {
     "@signalwire/realtime-api": "^3.0.2",
     "dotenv": "^16.0.1",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "phone": "^3.1.22"
   }
 }

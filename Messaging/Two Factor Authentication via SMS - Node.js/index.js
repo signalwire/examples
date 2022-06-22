@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Messaging } = require("@signalwire/realtime-api");
+const { phone } = require("phone");
 
 const express = require("express");
 const app = express();
@@ -11,12 +12,6 @@ app.use("/", express.static("html"));
 
 //Global variable to store challenge sessions
 const data = { requests: [] };
-
-function validatePhoneForE164(phoneNumber) {
-    const regEx = /^\+[1-9]\d{10,14}$/;
-
-    return regEx.test(phoneNumber);
-};
 
 const requestAuth = async (req, res) => {
     const authClient = new Messaging.Client({
@@ -31,8 +26,10 @@ const requestAuth = async (req, res) => {
     const code = Math.floor(Math.random() * (max - min + 1) + min);
 
     //check for for proper E.164 format
-    const number = req.body.number;
-    if (!validatePhoneForE164(number))
+    const numberInput = req.body.number;
+    const phoneInfo = phone(numberInput);
+    const number = phoneInfo.phoneNumber;
+    if (!phoneInfo.isValid)
         return res.status(400).send("Invalid Phone Number")
 
     data.requests.push({
@@ -57,8 +54,10 @@ const requestAuth = async (req, res) => {
 
 const validateAuth = (req, res) => {
     const code = req.body.auth_code;
-    const number = req.body.number;
-    if (!validatePhoneForE164(number))
+    const numberInput = req.body.number;
+    const phoneInfo = phone(numberInput);
+    const number = phoneInfo.phoneNumber;
+    if (!phoneInfo.isValid)
         return res.status(400).send("Invalid Phone Number")
 
     const requestCount = data.requests.length;

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HomePage</title>
+
+    <link href="app.css" rel="stylesheet">
+    <script src="https://unpkg.com/@signalwire/js@3.8.0"></script>
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+            integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+        const debounce = (callback, wait) => {
+            let timeoutId = null;
+            return (...args) => {
+                window.clearTimeout(timeoutId)
+                timeoutId = window.setTimeout(()=> {
+                    callback.apply(null, args)
+                }, wait)
+            }
+        }
+    </script>
+
+    <link href="bootstrap.css" rel="stylesheet">
+
+</head>
+<body>
+
+<template id="loginPage">
+    <div class="container p-5" style="max-width: 600px">
+        <h3 class="text-center">Chat Example</h3>
+
+        <form>
+
+            <div class="form-group mt-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="username">
+            </div>
+
+            <div class="form-group mt-4">
+                <label for="channels" class="form-label">Channels</label>
+                <input type="text" class="form-control" name="channels" id="channels">
+                <div class="form-text">
+                    Separate multiple channels with a comma.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Join Chat</button>
+
+        </form>
+    </div>
+</template>
+
+
+<template id="chatPage">
+
+    <div class="chatPage container p-3">
+        <h2 class="text-center">Chat</h2>
+        <p>Type <b>start</b> to get started</p>
+        <div id="channelsContainer"></div>
+        <div id="typing"></div>
+        <div id="messageEditor">
+            <textarea id="messageToSend"></textarea>
+            <div class="dropdown">
+                <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Send
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="sendButton"></ul>
+            </div>
+        </div>
+
+    </div>
+
+</template>
+
+<div id="app"></div>
+
+<script src="app.js"></script>
+<script src="bootstrap.js"></script>
+</body>
+</html>

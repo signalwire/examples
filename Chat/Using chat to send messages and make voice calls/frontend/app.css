@@ -1,0 +1,67 @@
+.chatPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chatPage #messageEditor .dropdown {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.chatPage #messageEditor #messageToSend {
+    margin-top: 20px;
+}
+
+.chatPage #messageEditor {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.chatPage #typing {
+    height: 1.1em;
+    margin-top: 1em;
+}
+
+#messagesContainer {
+    flex: 1;
+    flex-direction: column;
+}
+
+#channelsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 5px 20px;
+}
+
+#channelsContainer .channel {
+    width: 600px;
+    background-color: #e5e5e5;
+    padding: 10px 15px 20px 15px;
+}
+
+#channelsContainer .channel .messages-list {
+    height: 500px;
+    overflow: scroll;
+}
+
+#channelsContainer .message {
+    background: rgb(20, 127, 255);
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: white;
+    margin-top: 10px;
+}
+
+#channelsContainer .channel-name {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.message .message-meta {
+    font-style: italic;
+    font-size: 0.9em;
+    opacity: 0.8;
+}

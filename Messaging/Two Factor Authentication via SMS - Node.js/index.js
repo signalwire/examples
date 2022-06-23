@@ -10,7 +10,7 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use("/", express.static("html"));
 
-//Global variable to store challenge sessions
+// Global variable to store challenge sessions
 const data = { requests: [] };
 
 const requestAuth = async (req, res) => {
@@ -20,12 +20,12 @@ const requestAuth = async (req, res) => {
         contexts: ["auth"]
     });
 
-    //Generate a random 6 digit code between 123456 - 987654, inclusive
-    const min = Math.ceil(123456);
-    const max = Math.floor(987654);
+    // Generate a random 6 digit code between 123456 - 987654, inclusive
+    const min = 123456;
+    const max = 987654;
     const code = Math.floor(Math.random() * (max - min + 1) + min);
 
-    //check for for proper E.164 format
+    // Check for for proper E.164 format
     const numberInput = req.body.number;
     const phoneInfo = phone(numberInput);
     const number = phoneInfo.phoneNumber;
@@ -55,6 +55,7 @@ const requestAuth = async (req, res) => {
 const validateAuth = (req, res) => {
     const code = req.body.auth_code;
     const numberInput = req.body.number;
+    // Check for for proper E.164 format
     const phoneInfo = phone(numberInput);
     const number = phoneInfo.phoneNumber;
     if (!phoneInfo.isValid)
@@ -62,11 +63,10 @@ const validateAuth = (req, res) => {
 
     const requestCount = data.requests.length;
     data.requests = data.requests.filter((s) => {
-
         !(s.number === number && s.code === code)
     })
-    //If the request was filtered out, the auth code matched and we return 200
-    //If nothing was filtered out, no match was found and we return 403
+    // If the request was filtered out, the auth code matched and we return 200
+    // If nothing was filtered out, no match was found and we return 403
     return requestCount === data.requests.length ?
         res.status(403).send("Forbidden") :
         res.status(200).send("Success!");

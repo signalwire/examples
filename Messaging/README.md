@@ -15,7 +15,7 @@ This guide will show you how to create a phrase-based subscription service using
 [Two Factor Authentication via SMS - Python](./Two%20Factor%20Authentication%20via%20SMS%20-%20Python)  
 This application will generate a One-Time Password that is sent to the recipient's phone number via SMS. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure!
 
-[Two Factor Authentication via SMS - Node.js](./Two%20Factor%20Authentication%20via%20SMS%20-%20Node.js/)
+[Two Factor Authentication via SMS - Node.js](./Two%20Factor%20Authentication%20via%20SMS%20-%20Node.js/)  
 This application will generate a One-Time Password then uses the RELAY Realtime SDK to send it to the recipient's phone number via SMS. Application developers can enable two-factor authentication for their users with ease and without making any changes to the already existing application logic or database structure!
 
 [Sending SMS from the Browser - Node.js](./Sending%20SMS%20from%20the%20Browser%20-%20Node.js)

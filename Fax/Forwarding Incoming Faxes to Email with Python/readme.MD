@@ -16,7 +16,7 @@ You may need to use an SSH tunnel for testing this code if running on your local
 
 To use this Script, you need to expose it to the web (either through `ngrok` or by hosting it on a server) and use it as a webhook for handling incoming calls under phone number settings. For example, this is what it looks like if you use an ngrok tunnel to the script. For this script, you would use the given ngrok URL and the `/fax-webhook` route, like this `http://f0032dfdshhdsfkh7.ngrok.io/fax-webhook`
 
-![Screen Shot 2021-04-14 at 3 25 36 PM](https://user-images.githubusercontent.com/58792902/114774311-aca11f00-9d35-11eb-97f1-cae646f056bc.png)
+<img width="1242" alt="Screen Shot 2022-06-25 at 1 59 12 PM" src="https://user-images.githubusercontent.com/58792902/175787106-a4a90f22-c439-4954-98c1-10e1fadd5dc6.png">
 
 # Sign Up Here
 

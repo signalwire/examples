@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>SignalWire v3 Relay Dialer</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div>
+      <b>Phone Number:</b><input type="tel" id="dest" placeholder="Number to call" value="<%= destination %>">
+      <br />
+      <b>Message:</b>
+      <br />
+      <textarea id="msgText" rows="4" cols="50" >
+        Hello! You have an appointment tomorrow at 10 AM. Would you like to confirm it? Press 1 for yes and 2 for no.
+      </textarea>
+      <br />
+      <button type="button" onclick="sendReminder()">Send Reminder</button>
+    </div>
+
+    <div id="call-status" style="margin: 20px;">
+      <i id="status-icon" class="fas fa-hourglass-start" style="font-size:36px;color:blue;"></i>
+      <p id="notify-text"></p>
+    </div>
+
+    <script>
+      async function sendReminder() {
+        const data = {
+          message: document.getElementById('msgText').value,
+          number: document.getElementById('dest').value,
+        }
+        const response = await fetch('/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        return response.json();
+      }
+
+      const sse = new EventSource("/sse");
+
+      sse.addEventListener("message", ({data}) => {
+        console.log(data);
+        document.getElementById("notify-text").innerHTML = data;
+
+        const iconID = 'status-icon';
+        
+        var text = data.replace('"', '').slice(0, -1);
+
+        switch(text) {
+          case "STARTED":
+            document.getElementById(iconID).className = "fas fa-phone-volume";
+            break;
+          case "PROMPTING":
+            document.getElementById(iconID).className = "fas fa-terminal";
+            break;
+          case "FAILED":
+            document.getElementById(iconID).className = "fas fa-phone-slash";
+            break;
+          case "CONFIRMED":
+            document.getElementById(iconID).className = "fas fa-check";
+            break;
+          case "NOT_CONFIRMED":
+            document.getElementById(iconID).className = "fas fa-xmark";
+            break;
+          case "TRANSFERING":
+            document.getElementById(iconID).className = "fas fa-headphones";
+            break;
+        }
+
+      });
+    </script>
+  </body>
+</html>

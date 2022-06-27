@@ -11,7 +11,7 @@ const axios = require("axios")
 const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const {Voice, Messaging} = require("@signalwire/realtime-api")
+const { Voice, Messaging } = require("@signalwire/realtime-api")
 
 const app = express()
 const port = 3000
@@ -34,20 +34,18 @@ let messageClient = new Messaging.Client({
 
 app.post("/get_chat_token", async function (req, res) {
 
-    const {member_id, channels} = req.body
+    const { member_id, channels } = req.body
 
     const channelsPerms = {}
 
-    for (const c of channels.split(",")) {
-        channelsPerms[c] = {read: true, write: true}
-    }
+    channelsPerms[channels] = { read: true, write: true }
 
     const reply = await axios.post(apiUrl + "/api/chat/tokens", {
         ttl: 50,
         channels: channelsPerms,
         member_id,
         state: {}
-    }, {auth})
+    }, { auth })
 
     res.json({
         token: reply.data.token
@@ -58,20 +56,20 @@ app.post("/get_chat_token", async function (req, res) {
 // Endpoint to make the phone call
 app.post("/make_call", async function (req, res) {
     try {
-        const {from, to, content} = req.body
+        const { from, to, content } = req.body
         const call = await client.dialPhone({
             from: from,
             to: to,
             content: content
         })
 
-        let playback = await call.playTTS({text: content})
+        let playback = await call.playTTS({ text: content })
 
         await playback.waitForEnded();
 
         await call.hangup()
 
-        return res.json({"data": "Call initiated successfully"})
+        return res.json({ "data": "Call initiated successfully" })
 
     } catch (exception) {
         console.log("Call not answered")
@@ -82,17 +80,17 @@ app.post("/make_call", async function (req, res) {
 // Endpoint to send the message
 app.post("/send_message", async function (req, res) {
     try {
-        const {from, to, content} = req.body
+        const { from, to, content } = req.body
         const message = await messageClient.send({
             from: from,
             to: to,
             body: content,
             context: "users"
         })
-        return res.json({data: message})
+        return res.json({ data: message })
 
     } catch (e) {
-        return res.json({data: e.message})
+        return res.json({ data: e.message })
     }
 })
 

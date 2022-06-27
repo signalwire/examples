@@ -102,7 +102,6 @@ async function goToChatPage(member, channels) {
 
         const message = messageToSendEl.value;
 
-
         if (message.toLowerCase() === "start") {
             await chatClient.publish({
                 channel: channel,
@@ -148,21 +147,21 @@ async function goToChatPage(member, channels) {
             const voiceSelection = `
                 \tYou selected Voice\n
                 Enter the from, to, content parameter using the below format\\n
-                (ex. +1aaabbbcccc,+1xxxyyyzzzz, "Say hello world!")
+                (ex. +1aaabbbcccc,+1xxxyyyzzzz, "Welcome!")
             `
 
             await chatClient.publish({
                 channel: channel,
                 content: voiceSelection
             })
-        }else{
+        } else {
 
-            if (selectionType === "1"){
+            if (selectionType === "1") {
 
                 let data = message.trim().split(",")
-                let from = data[0]
-                let to = data[1]
-                let content = data[2]
+                let from = data[0].trim()
+                let to = data[1].trim()
+                let content = data[2].trim()
 
                 await chatClient.publish({
                     channel: channel,
@@ -171,57 +170,60 @@ async function goToChatPage(member, channels) {
 
                 sendSWMessage(from, to, content, channel, chatClient)
 
-            }else if (selectionType === "2"){
+            } else if (selectionType === "2") {
 
                 let data = message.trim().split(",")
-                let from = data[0]
-                let to = data[1]
-                let content = data[2]
+                let from = data[0].trim()
+                let to = data[1].trim()
+                let content = data[2].trim()
 
                 await chatClient.publish({
                     channel: channel,
                     content: message
                 })
 
-                makeCall(from, to, content, channel, chatClient)
+                makeCall(from, to,content, channel, chatClient)
 
-            }else if (selectionType === ""){
+            } else if (selectionType === "") {
                 console.log("Invalid selection")
             }
 
         }
+
+        // await chatClient.publish({
+        //     channel: channel,
+        //     content: message
+        // })
 
         messageToSendEl.value = ""
 
     }
 
     // intialize the UI
-    for (const channel of channels.split(",")) {
-        const channelEl = document.createElement("div")
-        channelEl.classList.add("channel")
-        channelEl.innerHTML = `
+    const channelEl = document.createElement("div")
+    channelEl.classList.add("channel")
+    channelEl.innerHTML = `
             <div class="channel-name"></div>
             <div class="messages-list"></div>
         `
 
-        channelEl.querySelector(".channel-name").innerText = channel
-        channelsContainerEl.append(channelEl)
-        channelDiv[channel] = channelEl
+    channelEl.querySelector(".channel-name").innerText = channels
+    channelsContainerEl.append(channelEl)
+    channelDiv[channels] = channelEl
 
-        const channelMenuEl = document.createElement("li")
-        channelMenuEl.innerHTML = `
+    const channelMenuEl = document.createElement("li")
+    channelMenuEl.innerHTML = `
             <a class="dropdown-item" href="#"></a>
         `
-        channelMenuEl.querySelector("a").innerText = channel;
-        channelMenuEl.querySelector("a").addEventListener("click", () => sendMessage(channel))
-        dropdownContainerEl.append(channelMenuEl)
-    }
+    channelMenuEl.querySelector("a").innerText = channels;
+    channelMenuEl.querySelector("a").addEventListener("click", () => sendMessage(channels))
+    dropdownContainerEl.append(channelMenuEl)
+
 
     messageToSendEl.addEventListener("keyup", userTyping)
 
-    for (const channel of channels.split(",")) {
-        downloadExistingMessages(channel)
-    }
+    downloadExistingMessages(channels)
+  
 
     chatClient.on("message", (message) => {
         displayMessage(message, message.channel)
@@ -239,14 +241,14 @@ async function goToChatPage(member, channels) {
 
         if (typingMemberIds.size === 0) {
             typingEl.innerText = ""
-        } else if (typingMemberIds === 1) {
-            typingEl.innerText = memberStr + "is typing..."
+        } else if (typingMemberIds.size === 1) {
+            typingEl.innerText = memberStr + " is typing..."
         } else {
             typingEl.innerText = memberStr + " are typing..."
         }
     })
 
-    chatClient.subscribe(channels)
+    chatClient.subscribe([channels])
 
 }
 
@@ -262,6 +264,7 @@ async function sendSWMessage(from, to, content, channel, chatClient) {
             }
 
             const result = await axios.post("/send_message", body)
+
             await chatClient.publish({
                 channel: channel,
                 content: "Message sent successfully!\n\nPress start to get-started"
@@ -273,13 +276,14 @@ async function sendSWMessage(from, to, content, channel, chatClient) {
 
 }
 
-async function makeCall(from, to, content,  channel, chatClient){
-    if (from !== "" && to !== "" ){
-        try{
+async function makeCall(from, to,content, channel, chatClient) {
+    if (from !== "" && to !== "") {
+        try {
 
             const body = {
                 from: from,
-                to: to
+                to: to,
+                content: content
             }
 
             const result = await axios.post("/make_call", body)
@@ -289,7 +293,7 @@ async function makeCall(from, to, content,  channel, chatClient){
                 content: "Call initiated successfully!\n\nPress start to get-started"
             })
 
-        }catch (e){
+        } catch (e) {
             console.log(e)
         }
     }

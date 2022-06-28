@@ -1,0 +1,19 @@
+{
+  "name": "weatherphoneivr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "@signalwire/realtime-api": "^3.1.0",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "libphonenumber-js": "^1.10.6"
+  },
+  "devDependencies": {
+    "forever": "^4.0.3",
+    "nodemon": "^1.18.4"
+  }
+}

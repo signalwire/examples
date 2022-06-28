@@ -22,7 +22,7 @@
             let timeoutId = null;
             return (...args) => {
                 window.clearTimeout(timeoutId)
-                timeoutId = window.setTimeout(()=> {
+                timeoutId = window.setTimeout(() => {
                     callback.apply(null, args)
                 }, wait)
             }
@@ -46,11 +46,8 @@
             </div>
 
             <div class="form-group mt-4">
-                <label for="channels" class="form-label">Channels</label>
-                <input type="text" class="form-control" name="channels" id="channels">
-                <div class="form-text">
-                    Separate multiple channels with a comma.
-                </div>
+                <label for="channel" class="form-label">Channel</label>
+                <input type="text" class="form-control" name="channel" id="channel">
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Join Chat</button>
@@ -69,16 +66,14 @@
         <div id="typing"></div>
         <div id="messageEditor">
             <textarea id="messageToSend"></textarea>
-            <div class="dropdown">
-                <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Send
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="sendButton"></ul>
-            </div>
+            <br>
+            <button
+                    class="btn btn-secondary"
+                    type="button"
+                    id="sendButton"
+            >
+                Send
+            </button>
         </div>
 
     </div>

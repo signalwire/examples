@@ -6,7 +6,7 @@ function goToLoginPage() {
     appEl.innerHTML = document.getElementById("loginPage").innerHTML
 
     const memberEl = appEl.querySelector("#username")
-    const channelsEl = appEl.querySelector("#channels")
+    const channelsEl = appEl.querySelector("#channel")
 
     appEl.querySelector("form").addEventListener("submit", (e) => {
         e.preventDefault()
@@ -15,13 +15,13 @@ function goToLoginPage() {
 }
 
 
-async function goToChatPage(member, channels) {
+async function goToChatPage(member, channel) {
 
     appEl.innerHTML = document.getElementById("chatPage").innerHTML
 
     const channelsContainerEl = document.querySelector("#channelsContainer")
     const messageToSendEl = document.querySelector("#messageToSend")
-    const dropdownContainerEl = document.querySelector(".dropdown ul")
+    const sendButtonEl = document.querySelector("#sendButton")
 
     let isCurrentlyTyping = false
 
@@ -31,7 +31,7 @@ async function goToChatPage(member, channels) {
 
     const reply = await axios.post("/get_chat_token", {
         member_id: member,
-        channels: channels
+        channel: channel
     })
 
     const token = reply.data.token
@@ -75,7 +75,7 @@ async function goToChatPage(member, channels) {
 
     const typingTimeout = debounce(() => {
         chatClient.setMemberState({
-            channels: channels,
+            channels: channel,
             state: {
                 typing: false
             }
@@ -88,7 +88,7 @@ async function goToChatPage(member, channels) {
         if (!isCurrentlyTyping) {
             isCurrentlyTyping = true
             chatClient.setMemberState({
-                channels: channels,
+                channels: channel,
                 state: {
                     typing: true
                 }
@@ -190,11 +190,6 @@ async function goToChatPage(member, channels) {
 
         }
 
-        // await chatClient.publish({
-        //     channel: channel,
-        //     content: message
-        // })
-
         messageToSendEl.value = ""
 
     }
@@ -207,23 +202,17 @@ async function goToChatPage(member, channels) {
             <div class="messages-list"></div>
         `
 
-    channelEl.querySelector(".channel-name").innerText = channels
+    channelEl.querySelector(".channel-name").innerText = channel
     channelsContainerEl.append(channelEl)
-    channelDiv[channels] = channelEl
+    channelDiv[channel] = channelEl
 
-    const channelMenuEl = document.createElement("li")
-    channelMenuEl.innerHTML = `
-            <a class="dropdown-item" href="#"></a>
-        `
-    channelMenuEl.querySelector("a").innerText = channels;
-    channelMenuEl.querySelector("a").addEventListener("click", () => sendMessage(channels))
-    dropdownContainerEl.append(channelMenuEl)
+    sendButtonEl.addEventListener("click", ()=> sendMessage(channel))
 
 
     messageToSendEl.addEventListener("keyup", userTyping)
 
-    downloadExistingMessages(channels)
-  
+    downloadExistingMessages(channel)
+
 
     chatClient.on("message", (message) => {
         displayMessage(message, message.channel)
@@ -248,7 +237,7 @@ async function goToChatPage(member, channels) {
         }
     })
 
-    chatClient.subscribe([channels])
+    chatClient.subscribe([channel])
 
 }
 

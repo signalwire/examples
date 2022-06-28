@@ -34,11 +34,11 @@ let messageClient = new Messaging.Client({
 
 app.post("/get_chat_token", async function (req, res) {
 
-    const { member_id, channels } = req.body
+    const { member_id, channel } = req.body
 
     const channelsPerms = {}
 
-    channelsPerms[channels] = { read: true, write: true }
+    channelsPerms[channel] = { read: true, write: true }
 
     const reply = await axios.post(apiUrl + "/api/chat/tokens", {
         ttl: 50,
@@ -85,7 +85,7 @@ app.post("/send_message", async function (req, res) {
             from: from,
             to: to,
             body: content,
-            context: "users"
+            context: "user"
         })
         return res.json({ data: message })
 

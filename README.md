@@ -10,7 +10,7 @@ Explore our guides and code examples.
 
 &nbsp;&nbsp; [📞 &nbsp; Phone Numbers](./PhoneNumbers)
   
-&nbsp;&nbsp; 💬 &nbsp; Chat
+&nbsp;&nbsp; [💬 &nbsp; Chat](./Chat)
   
 &nbsp;&nbsp; [💬 &nbsp; Messaging](./Messaging)
   

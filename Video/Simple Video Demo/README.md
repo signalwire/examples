@@ -22,6 +22,8 @@ SIGNALWIRE_API_TOKEN=<Your API token here>
 SIGNALWIRE_SPACE_URL=<your space name>.signalwire.com
 ```
 
+You can specify the certificate file and key in `CERT_FILE_PATH` and `KEY_FILE_PATH` (see `env.example`).
+
 ## Running the Application
 
 If you are running the application locally:
@@ -32,7 +34,7 @@ If you are running the application locally:
 
  If you prefer to run the application via Docker, first building the image with `docker build -t videosdk .` Then run `docker run -it --rm -p 4000:4000 --name firstdemo --env-file .env videosdk`.
 
-Either way you choose to run the backend, after starting the application, you can find a test page at `http://localhost:4000`.
+Either way you choose to run the backend, after starting the application, you can find a test page at `https://localhost:4000`.
 
 ## Get started with SignalWire
 

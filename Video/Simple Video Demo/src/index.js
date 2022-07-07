@@ -1,8 +1,18 @@
+require("dotenv").config();
+
+require('log-timestamp');
+
 const auth = {
     username: process.env.SIGNALWIRE_PROJECT_ID, // Project-ID
     password: process.env.SIGNALWIRE_API_TOKEN // API token
 };
 const apiurl = `https://${process.env.SIGNALWIRE_SPACE_URL}/api/video/`;
+
+const fs = require('fs')
+const key_file_path = process.env.KEY_FILE_PATH;
+const cert_file_path = process.env.CERT_FILE_PATH;
+const http = require('http')
+const https = require('https')
 
 // Basic express boilerplate
 const express = require("express");
@@ -31,7 +41,8 @@ app.post("/get_token", async (req, res) => {
                     "room.self.audio_mute",
                     "room.self.audio_unmute",
                     "room.self.video_mute",
-                    "room.self.video_unmute"
+                    "room.self.video_unmute",
+                    "room.hide_video_muted"
                 ]
             },
             { auth }
@@ -47,9 +58,22 @@ app.post("/get_token", async (req, res) => {
 app.use(express.static("src/frontend/"));
 
 async function start(port) {
-    app.listen(port, () => {
-        console.log("Server listening at port", port);
-    });
+    if (typeof key_file_path === "undefined" || typeof cert_file_path === "undefined") {
+        http.createServer(app).listen(port, () => {
+            console.log("HTTP Server listening at port", port);
+        });
+    }
+    else {
+        const https_options = {
+            key: fs.readFileSync(key_file_path),
+            cert: fs.readFileSync(cert_file_path)
+        };
+
+        console.log("KEY: ", https_options.key, " CERT: ", https_options.cert);
+        https.createServer(https_options, app).listen(port, () => {
+            console.log("HTTPS Server listening at port", port);
+        });
+    }
 }
 
 // Start the server

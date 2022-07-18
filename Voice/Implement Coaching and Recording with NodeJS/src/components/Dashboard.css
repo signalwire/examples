@@ -1,0 +1,31 @@
+﻿@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+.center {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    margin-left: -200px;
+    margin-top: -200px;
+}
+
+.my-modal {
+    width: calc(100vw - 100px);
+    max-width: 90%;
+}
+
+.modal-card {
+   width: 90%;
+}
+
+.modal-content {
+    width: 90%;
+}

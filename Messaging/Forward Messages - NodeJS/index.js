@@ -19,14 +19,17 @@ client.on("message.received", async (message) => {
   let date = new Date().toLocaleDateString();
   let text = message.body;
   let sender = message.from;
-  let media = message.media;
+  let media;
+  if (message.media) {
+    media = message.media;
+  }
 
   let data = {
     from: process.env.ORIGINAL_NUMBER,
     to: process.env.TO_NUMBER,
     context: "office",
     body: `At ${date} you received a message from ${sender} to ${process.env.ORIGINAL_NUMBER}. The message body was: '${text}'.`,
-    media: media,
+    media,
   };
   console.log(data);
 

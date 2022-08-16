@@ -6,10 +6,9 @@
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
+    "@signalwire/compatibility-api": "^3.0.2",
     "axios": "^0.26.1",
-    "dotenv": "^16.0.0",
-    "@signalwire/node": "^2.4.0"
+    "dotenv": "^16.0.0"
   }
 }

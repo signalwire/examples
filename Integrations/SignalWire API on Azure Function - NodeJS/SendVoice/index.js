@@ -1,11 +1,11 @@
 require('dotenv').config()
-const {RestClient} = require('@signalwire/node')
+const {RestClient} = require('@signalwire/compatibility-api')
 
 const username = process.env.PROJECT_ID
 const token = process.env.API_TOKEN
 const spaceURL = process.env.SPACE_URL
 
-const client = new RestClient(username, token, {signalwireSpaceUrl: spaceURL})
+const client = RestClient(username, token, {signalwireSpaceUrl: spaceURL})
 
 module.exports = async function (context, req) {
     

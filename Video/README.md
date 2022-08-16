@@ -12,5 +12,5 @@ Very simple demonstration of getting and refreshing Room Previews.
 [Layout Positions](./Layout-Positions)  
 This guide shows how to control positions and layouts in a video room.
 
-[React Native Basic Component](./React%20Native%20Basic)  
+[React Native Basic Component](./React-Native-Basic)  
 Use components from SignalWire Community to create a simple video calling app with React Native.

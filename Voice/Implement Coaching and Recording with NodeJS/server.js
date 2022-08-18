@@ -24,8 +24,8 @@ var authToken = process.env.SIGNALWIRE_TOKEN;
 
 const {
   RestClient
-} = require('@signalwire/node')
-const client = new RestClient(accountSid, authToken, { signalwireSpaceUrl: SIGNALWIRE_SPACE })
+} = require('@signalwire/compatibility-api')
+const client = RestClient(accountSid, authToken, { signalwireSpaceUrl: SIGNALWIRE_SPACE })
 
 const app = express();
 app.use(express.urlencoded({

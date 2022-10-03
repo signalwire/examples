@@ -1,0 +1,17 @@
+.container {
+    margin-bottom: 2em;
+}
+
+.container > div {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.container > div:hover {
+    background-color: rgb(51,51,51);
+}
+
+.container > div > span {
+    flex: 1;
+}

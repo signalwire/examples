@@ -23,7 +23,7 @@ export default function Members({ roomSession }) {
 
 function SmallLeaveButton({ roomSession, member }) {
   return (
-    <Tooltip title="Leave">
+    <Tooltip title="Remove">
       <IconButton
         size="small"
         color="primary"

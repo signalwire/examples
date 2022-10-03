@@ -2,7 +2,7 @@
 
 WARNING: This demo is Early Access. The SDK methods and events can and will change. Do not use in production.
 
-## Gest started
+## Get started
 
 Create a file at `server/.env`, with the following information:
 

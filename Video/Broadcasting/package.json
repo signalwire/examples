@@ -8,7 +8,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@signalwire-community/react": "^1.4.2",
-    "@signalwire/js": "^3.16.0-dev.202209281055.e345397.0",
+    "@signalwire/js": "^3.17.0-dev.202210211428.8dc3d43.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "resolutions": {
-    "@signalwire/js": "^3.16.0-dev.202209281055.e345397.0"
+    "@signalwire/js": "^3.17.0-dev.202210211428.8dc3d43.0"
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"npm run start:server\"",

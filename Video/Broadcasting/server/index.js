@@ -3,7 +3,7 @@ const auth = {
   username: process.env.PROJECT_ID, // Project-ID
   password: process.env.API_KEY, // API token
 };
-const space_url = process.env.SPACE_URL; // https://<your username>/api/video
+const space_url = process.env.SPACE_URL; // <your username>.signalwire.com
 
 // Basic express boilerplate
 const express = require("express");

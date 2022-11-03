@@ -12,7 +12,7 @@ curl -L -X POST 'https://<spacename>.signalwire.com/api/chat/tokens' \
   "channels": {
     "my_live_stream": {
       "read": true,
-      "write": false
+      "write": true
     }
   },
   "member_id": "user",
@@ -23,7 +23,7 @@ curl -L -X POST 'https://<spacename>.signalwire.com/api/chat/tokens' \
 */
 
 const token =
-  "eyJ0eXAiOiJDUlQiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Njc0ODIwODAsImp0aSI6IjE2MGE4MjA3LTY0OTYtNDc3ZS05NGEzLTAwNWEwNGVmZTMxZCIsInN1YiI6IjdiOTgxZDA2LWZhOWUtNDM1Yy05YzJlLWIzMWUyOTVhYmQzYSIsInQiOjQzMjAwLCJjaGxzIjp7Im15X2xpdmVfc3RyZWFtIjp7InJlYWQiOnRydWUsIndyaXRlIjpmYWxzZX19LCJzdHQiOnt9LCJtIjoidXNlciJ9.-fPmhAuCK7_xqv5AlMk-1bAAs9zcRx1Kv44en9EADOo9sDKuBuO3hhNUSZIEgMJuF4gVVxX9hgpEaJdKiH0cpA";
+  "eyJ0eXAiOiJDUlQiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Njc0ODMzNDgsImp0aSI6IjJiYWM0NDEzLWEzYTAtNGM2Ni1iYTNlLTRiZmU4M2NlNjg4NiIsInN1YiI6IjdiOTgxZDA2LWZhOWUtNDM1Yy05YzJlLWIzMWUyOTVhYmQzYSIsInQiOjQzMjAwLCJjaGxzIjp7Im15X2xpdmVfc3RyZWFtIjp7InJlYWQiOnRydWUsIndyaXRlIjp0cnVlfX0sInN0dCI6e30sIm0iOiJ1c2VyIn0.87gN8A5xaBT2d95huFBDXQGHss8aBK6xNO4li3bLXL6fyCDKUbJ86rYhtMzktQ3eR7Cj3NFkqB-8FapM2Ll4Eg";
 
 export async function askPromotion(memberId, userName) {
   const pubSubClient = new PubSub.Client({ token });

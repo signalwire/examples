@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       stream = await roomSession.startStream({ url });
       document.getElementById("streaming").style.display = "block";
+      document.getElementById("start").style.display = "none";
+      document.getElementById("stop").style.display = "inline";
     } catch (error) {
       console.log(error);
       alert(
@@ -40,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       stopStream();
       document.getElementById("streaming").style.display = "none";
+      document.getElementById("start").style.display = "inline";
+      document.getElementById("stop").style.display = "none";
     } catch (e) {
       console.log(e);
     }

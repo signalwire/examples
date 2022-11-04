@@ -40,11 +40,18 @@ h1,
 
 #start,
 #stop {
-  background-color: #044ef4;
   color: white;
   font-weight: 500;
   border: none;
   border-radius: 5px;
   padding: 8px;
   cursor: pointer;
+}
+
+#start {
+  background-color: #044ef4;
+}
+#stop {
+  display: none;
+  background-color: rgb(211, 96, 96);
 }

@@ -30,6 +30,10 @@ h1,
   display: none;
 }
 
+#streaming {
+  display: none;
+}
+
 #stream-url {
   width: 400px;
 }

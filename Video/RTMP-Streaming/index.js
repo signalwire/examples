@@ -24,12 +24,24 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const url = document.getElementById("stream-url").value;
-    stream = await roomSession.startStream({ url });
+    try {
+      stream = await roomSession.startStream({ url });
+      document.getElementById("streaming").style.display = "block";
+    } catch (error) {
+      console.log(error);
+      alert(
+        "There was an error starting the stream. Please check your URL and try again."
+      );
+    }
   };
 
   document.getElementById("stop").onclick = (e) => {
     e.preventDefault();
-
-    stopStream();
+    try {
+      stopStream();
+      document.getElementById("streaming").style.display = "none";
+    } catch (e) {
+      console.log(e);
+    }
   };
 });

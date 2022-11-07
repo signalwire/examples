@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Streaming Demo</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div>
+      <img src="swlogo.png" id="logo" />
+      <h1>SignalWire Video Streaming Demo</h1>
+    </div>
+    <div id="pvc">
+      <script>
+        !(function (e, t) {
+          function i() {
+            let t = Object.assign({ rootElement: r }, e.swvr.p);
+            SignalWire.AppKit.VideoConference(t);
+          }
+          e.swvr =
+            e.swvr ||
+            function (t = {}) {
+              Object.assign((e.swvr.p = e.swvr.p || {}), t);
+            };
+          let r = t.currentScript,
+            n = t.createElement("script");
+          (n.type = "module"),
+            (n.src =
+              "https://cdn.signalwire.com/@signalwire/app-kit@next/dist/signalwire/signalwire.esm.js"),
+            (n.defer = !0),
+            (n.onload = i),
+            r.parentNode.insertBefore(n, r);
+          let s = t.createElement("script");
+          (s.type = "text/javascript"),
+            (s.noModule = !0),
+            (s.src =
+              "https://cdn.signalwire.com/@signalwire/app-kit@next/dist/signalwire/signalwire.js"),
+            (s.defer = !0),
+            (s.onload = i),
+            r.parentNode.insertBefore(s, r);
+          let o = t.createElement("link");
+          (o.type = "text/css"),
+            (o.rel = "stylesheet"),
+            (o.href =
+              "https://cdn.signalwire.com/@signalwire/app-kit@next/dist/signalwire/signalwire.css"),
+            r.parentNode.insertBefore(o, r),
+            (e.SignalWire = e.SignalWire || {
+              Prebuilt: {
+                VideoRoom: e.swvr,
+              },
+              AppKit: { VideoConference: e.swvr },
+            });
+        })(window, document);
+        SignalWire.AppKit.VideoConference({
+          token: "vpt_40b1525da19170da2411dbd50a1b2458",
+          setupRoomSession: setRoomSession,
+        });
+      </script>
+      <div id="button-bar">
+        <p id="streaming">Outbound stream is active...</p>
+        <form id="rtmp-form">
+          <label for="stream-url">RTMP Streaming URL</label>
+          <input
+            type="url"
+            id="stream-url"
+            required
+            placeholder="rtmp://&lt;stream_url&gt;/&lt;stream_key&gt;"
+          />
+          <button id="start" type="submit">Start Stream</button>
+          <button id="stop">Stop Stream</button>
+        </form>
+        <p id="note">
+          If your streaming service provides a stream key, append it to the
+          stream URL, separated by a slash.
+          <br />
+          ex: rtmp://&lt;stream_url&gt;/&lt;stream_key&gt;.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

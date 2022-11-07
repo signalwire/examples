@@ -8,7 +8,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@signalwire/node": "^2.3.3",
+    "@signalwire/compatibility-api": "^3.0.3",
     "ansi-colors": "^4.1.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
@@ -29,7 +29,6 @@
     "showdown": "^1.9.1",
     "twilio": "^3.54.2"
   },
-  "devDependencies": {},
   "eslintConfig": {
     "extends": "react-app"
   },

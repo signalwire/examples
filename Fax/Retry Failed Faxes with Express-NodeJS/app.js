@@ -1,7 +1,7 @@
 // require ngrok, express, and our SignalWire client
 const ngrok = require('ngrok');
 const express = require("express");
-const { RestClient } = require('@signalwire/node')
+const { RestClient } = require('@signalwire/compatibility-api')
 
 //Set some environment variables, Domain will be set to our ngrok domain for testing, but would be changed to this app's host domain
 let DOMAIN = ""
@@ -18,7 +18,7 @@ function respondAndLog(res, response) {
 }
 // Sends a dummy fax using our environment variables, and sets a status callback
 async function sendFaxTo(number, querystring = '') {
-  const client = new RestClient(SIGNALWIRE_PROJECT, SIGNALWIRE_TOKEN, { signalwireSpaceUrl: SIGNALWIRE_SPACE})
+  const client = RestClient(SIGNALWIRE_PROJECT, SIGNALWIRE_TOKEN, { signalwireSpaceUrl: SIGNALWIRE_SPACE})
   const fax = await client.fax.faxes.create({
     from: FROM_NUMBER,
     to: number,

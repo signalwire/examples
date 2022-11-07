@@ -12,7 +12,7 @@ A very simple demonstration of getting and refreshing Room Previews.
 [Layout Positions](./Layout-Positions)  
 This guide shows how to control positions and layouts in a video room.
 
-[RTMP Streaming](./RTMP-Streaming/)
+[RTMP Streaming](./RTMP-Streaming)  
 A simple example of RTMP streaming from a PVC to the RTMP URL of your choice.
 
 [React Native Basic Component](./React-Native-Basic)  

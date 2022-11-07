@@ -1,0 +1,57 @@
+#logo {
+  max-width: 200px;
+}
+
+#pvc {
+  margin: 0 auto;
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+#id {
+  margin: 0 auto;
+}
+
+#note {
+  color: #8e9292;
+}
+
+h1,
+#button-bar {
+  margin: 5px auto;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+#button-bar {
+  display: none;
+}
+
+#streaming {
+  display: none;
+}
+
+#stream-url {
+  width: 400px;
+}
+
+#start,
+#stop {
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+#start {
+  background-color: #044ef4;
+}
+#stop {
+  display: none;
+  background-color: rgb(211, 96, 96);
+}

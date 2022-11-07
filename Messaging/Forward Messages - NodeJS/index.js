@@ -1,5 +1,5 @@
 require("dotenv").config();
-let { Messaging } = require("@signalwire/realtime-api");
+const { Messaging } = require("@signalwire/realtime-api");
 
 const client = new Messaging.Client({
   project: process.env.PROJECT_ID,
@@ -16,16 +16,16 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 client.on("message.received", async (message) => {
   console.log(message);
-  let date = new Date().toLocaleDateString();
-  let text = "'" + message.body + "'";
-  let sender = message.from;
+  const date = new Date().toLocaleDateString();
+  const text = "'" + message.body + "'";
+  const sender = message.from;
   let media;
   if (message.media) {
     media = message.media;
     text = "media only";
   }
 
-  let data = {
+  const data = {
     from: process.env.ORIGINAL_NUMBER,
     to: process.env.TO_NUMBER,
     context: "office",

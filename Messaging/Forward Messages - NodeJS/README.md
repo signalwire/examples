@@ -4,7 +4,7 @@ This super simple guide will show how you can handle incoming messages and forwa
 
 # Setup Your Environment File
 
-Copy from .env.sample and fill in your values.
+Copy from env.sample and fill in your values.
 
 You will need a SignalWire phone number as well as your API Credentials (API Token and Project ID) from within the API tab of your SignalWire Space.
 

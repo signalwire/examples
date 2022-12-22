@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { PubSub, WebRTC } from "@signalwire/js";
 
+/**
+ * We use a PubSub channel to exchange promotion requests. When an audience
+ * member wants to be promoted, we send the `ASK_PROMOTION` message into the
+ * channel. Any member can listen to `ASK_PROMOTION` messages to determine who
+ * wants to be promoted.
+ *
+ * Once an audience member has been promoted, we send the `PROMOTED` message
+ * into the channel. This allows members to know that the promotion request can
+ * be removed, since the user has already been promoted.
+ */
+
 let token = null;
 
 /**
- * Get a chat token to use to exchange promotion request messages.
+ * Get a PubSub token to use to exchange promotion request messages.
  * @returns
  */
 const getToken = async () => {
@@ -21,6 +32,11 @@ const getToken = async () => {
   return token;
 };
 
+/**
+ * Sends a promotion request message into the PubSub channel
+ * @param {string} memberId
+ * @param {string} userName
+ */
 export async function askPromotion(memberId, userName) {
   const pubSubClient = new PubSub.Client({ token });
 
@@ -35,7 +51,7 @@ export async function askPromotion(memberId, userName) {
 }
 
 async function promoted(memberId, newMemberId, name) {
-  const pubSubClient = new PubSub.Client({ token });
+  const pubSubClient = new PubSub.Client({ token: await getToken() });
 
   await pubSubClient.publish({
     channel: "my_live_stream",
@@ -48,6 +64,11 @@ async function promoted(memberId, newMemberId, name) {
   });
 }
 
+/**
+ * Listens to promotion requests and returns an updated list of users who would
+ * like to be promoted.
+ * @returns
+ */
 export function usePromotionRequests() {
   const [requests, setRequests] = useState([]);
 
@@ -82,14 +103,15 @@ export function usePromotionRequests() {
       }
     }
 
-    const client = new PubSub.Client({ token });
-
-    client.on("message", (msg) => handleMessage(msg));
-
-    client.subscribe("my_live_stream");
+    let client;
+    (async () => {
+      client = new PubSub.Client({ token: await getToken() });
+      client.on("message", (msg) => handleMessage(msg));
+      client.subscribe("my_live_stream");
+    })();
 
     return () => {
-      client.disconnect();
+      client?.disconnect();
     };
   }, []);
 
@@ -98,7 +120,7 @@ export function usePromotionRequests() {
 
 /**
  * Ensures that when a user is promoted, it is cleared from the list of
- * promotion requests.
+ * promotion requests by sending a PROMOTED message into the PubSub channel.
  */
 export function usePromotionSignal(roomSession) {
   useEffect(() => {

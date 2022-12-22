@@ -9,19 +9,13 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 
-const options = [
-  "Create a merge commit",
-  "Squash and merge",
-  "Rebase and merge",
-];
-
 export default function SplitButton({
   muted = false,
   mutedIcon = <></>,
   unmutedIcon = <></>,
   devices = [],
-  onSetMuted = (muted) => {},
-  onDevicePicked = (device) => {},
+  onSetMuted = (_muted) => {},
+  onDevicePicked = (_device) => {},
 }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);

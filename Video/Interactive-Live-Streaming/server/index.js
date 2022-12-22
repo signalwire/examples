@@ -1,7 +1,7 @@
 require("dotenv").config();
 const auth = {
   username: process.env.PROJECT_ID, // Project-ID
-  password: process.env.API_KEY, // API token
+  password: process.env.API_TOKEN, // API token
 };
 const space_url = process.env.SPACE_URL; // <your username>.signalwire.com
 
@@ -31,8 +31,6 @@ app.post("/get_audience_token", async (req, res) => {
 
     return res.json({ token: token.data?.token });
   } catch (e) {
-    console.log("*****");
-    console.log(e);
     return res.sendStatus(500);
   }
 });
@@ -69,8 +67,30 @@ app.post("/get_member_token", async (req, res) => {
 
     return res.json({ token: token.data?.token });
   } catch (e) {
-    console.log("*****");
-    console.log(e);
+    return res.sendStatus(500);
+  }
+});
+
+app.post("/get_chat_token", async (req, res) => {
+  try {
+    const token = await axios.post(
+      `https://${space_url}/api/chat/tokens`,
+      {
+        ttl: 43200,
+        channels: {
+          my_live_stream: {
+            read: true,
+            write: true,
+          },
+        },
+        member_id: "system",
+        state: {},
+      },
+      { auth }
+    );
+
+    return res.json({ token: token.data?.token });
+  } catch (e) {
     return res.sendStatus(500);
   }
 });

@@ -10,7 +10,7 @@ Create a file at `server/.env`, with the following information:
 # server/.env
 
 PROJECT_ID=<signalwire-project-id>
-API_KEY=<signalwire-api-key>
+API_TOKEN=<signalwire-api-key>
 SPACE_URL=<signalwire-space-url>.signalwire.com
 ```
 

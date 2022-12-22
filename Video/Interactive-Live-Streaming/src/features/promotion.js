@@ -1,29 +1,25 @@
 import { PubSub, WebRTC } from "@signalwire/js";
 import { useEffect, useState } from "react";
 
-/*
+let token = null;
 
-curl -L -X POST 'https://<spacename>.signalwire.com/api/chat/tokens' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--u 'ProjectId:APIToken' \
---data-raw '{
-  "ttl": 43200,
-  "channels": {
-    "my_live_stream": {
-      "read": true,
-      "write": true
-    }
-  },
-  "member_id": "user",
-  "state": {}
-}'
+/**
+ * Get a chat token to use to exchange promotion request messages.
+ * @returns
+ */
+const getToken = async () => {
+  if (token) return token;
 
+  const newtoken = await fetch(`http://127.0.0.1:15000/get_chat_token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-*/
-
-const token =
-  "eyJ0eXAiOiJDUlQiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2Njc0ODMzNDgsImp0aSI6IjJiYWM0NDEzLWEzYTAtNGM2Ni1iYTNlLTRiZmU4M2NlNjg4NiIsInN1YiI6IjdiOTgxZDA2LWZhOWUtNDM1Yy05YzJlLWIzMWUyOTVhYmQzYSIsInQiOjQzMjAwLCJjaGxzIjp7Im15X2xpdmVfc3RyZWFtIjp7InJlYWQiOnRydWUsIndyaXRlIjp0cnVlfX0sInN0dCI6e30sIm0iOiJ1c2VyIn0.87gN8A5xaBT2d95huFBDXQGHss8aBK6xNO4li3bLXL6fyCDKUbJ86rYhtMzktQ3eR7Cj3NFkqB-8FapM2Ll4Eg";
+  token = (await newtoken.json()).token;
+  return token;
+};
 
 export async function askPromotion(memberId, userName) {
   const pubSubClient = new PubSub.Client({ token });
@@ -52,7 +48,7 @@ async function promoted(memberId, newMemberId, name) {
   });
 }
 
-export function usePromotionRequests(roomSession) {
+export function usePromotionRequests() {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {

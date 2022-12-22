@@ -5,7 +5,7 @@ import { usePromotionRequests } from "../features/promotion";
 import style from "./Audience.module.css";
 
 export default function Audience({ roomSession }) {
-  const promotionRequests = usePromotionRequests(roomSession);
+  const promotionRequests = usePromotionRequests();
 
   return (
     <div className={style.container}>

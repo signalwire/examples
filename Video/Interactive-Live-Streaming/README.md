@@ -14,4 +14,4 @@ API_TOKEN=<signalwire-api-key>
 SPACE_URL=<signalwire-space-url>.signalwire.com
 ```
 
-Then install the dependencies with `yarn` and run the server and the client with `yarn start`.
+Then install the dependencies with `npm install` and run the server and the client with `npm run start`.

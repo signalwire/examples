@@ -1,6 +1,6 @@
 # Interactive Live Streaming Demo
 
-WARNING: This demo is Early Access. The SDK methods and events can and will change. Do not use in production.
+📖 [Read the full guide](https://developer.signalwire.com/guides/video/interactive-live-streaming)
 
 ## Get started
 

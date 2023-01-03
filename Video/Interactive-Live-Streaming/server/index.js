@@ -71,10 +71,10 @@ app.post("/get_member_token", async (req, res) => {
   }
 });
 
-app.post("/get_chat_token", async (req, res) => {
+app.post("/get_pubsub_token", async (req, res) => {
   try {
     const token = await axios.post(
-      `https://${space_url}/api/chat/tokens`,
+      `https://${space_url}/api/pubsub/tokens`,
       {
         ttl: 43200,
         channels: {

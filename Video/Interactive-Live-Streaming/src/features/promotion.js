@@ -21,7 +21,7 @@ let token = null;
 const getToken = async () => {
   if (token) return token;
 
-  const newtoken = await fetch(`http://127.0.0.1:15000/get_chat_token`, {
+  const newtoken = await fetch(`http://127.0.0.1:15000/get_pubsub_token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

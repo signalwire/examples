@@ -14,6 +14,6 @@ API_TOKEN=<signalwire-api-key>
 SPACE_URL=<signalwire-space-url>.signalwire.com
 ```
 
-Make sure that your API token has Video, Chat, and PubSub scopes enabled.
+Make sure that your API token has the Video and PubSub scopes enabled.
 
 Then install the dependencies with `npm install` and run the server and the client with `npm run start`.

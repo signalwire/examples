@@ -5,6 +5,19 @@ const auth = {
 };
 const space_url = process.env.SPACE_URL; // <your username>.signalwire.com
 
+if (!auth.username) {
+  console.error("Error: PROJECT_ID not specified.");
+  process.exit(1);
+}
+if (!auth.password) {
+  console.error("Error: API_TOKEN not specified.");
+  process.exit(1);
+}
+if (!space_url) {
+  console.error("Error: SPACE_URL not specified.");
+  process.exit(1);
+}
+
 // Basic express boilerplate
 const express = require("express");
 const bodyParser = require("body-parser");

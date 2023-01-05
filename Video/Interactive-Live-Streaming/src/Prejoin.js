@@ -8,6 +8,8 @@ export default function Prejoin() {
   const [username, setUsername] = useState("");
 
   async function onJoinClicked(mod) {
+    if (!username) return;
+
     const endpoint = mod ? "/get_member_token" : "/get_audience_token";
     const token = await fetch(`http://127.0.0.1:15000${endpoint}`, {
       method: "POST",

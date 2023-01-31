@@ -3,6 +3,11 @@ require 'sinatra'
 require 'signalwire'
 
 set :port, 8080
+set :bind, '0.0.0.0'
+
+get '/' do
+  "It's working!"
+end
 
 post '/start' do
   response = Signalwire::Sdk::VoiceResponse.new

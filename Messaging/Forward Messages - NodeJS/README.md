@@ -1,6 +1,6 @@
 # Forward Messages to Another Phone Number with Node.js
 
-This super simple guide will show how you can handle incoming messages and forward them to another phone number. We will use the [SignalWire Javascript SDK](https://developer.signalwire.com/client-sdk/reference/js-exports) to handle the incoming message and [RELAY Realtime API]() to forward the message.
+This super simple guide will show how you can handle incoming messages and forward them to another phone number. We will use the [SignalWire Javascript SDK](https://developer.signalwire.com/client-sdk/reference/js-exports) to handle the incoming message and [RELAY Realtime API](https://developer.signalwire.com/sdks/reference/realtime-sdk/) to forward the message.
 
 # Setup Your Environment File
 

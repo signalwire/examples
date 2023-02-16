@@ -8,17 +8,17 @@ Copy the contents of `env.example` and save them in a new file called `.env`. Fi
 
 ## Run Your Express Server
 
-This example runs a web server to serve our webhooks using [Express](https://expressjs.com/en/starter/installing.html). After your environmental variables are set, you can start the Express server with `npm run start`.
+This example serves our webhooks using an [Express](https://expressjs.com/en/starter/installing.html) server. After your environmental variables are set, you can install dependencies with `npm install` then start the Express server with `npm run start`. If you prefer to use Docker, build the image with `docker build -t sipvoicemail .` and run it with `docker run --p 3000:3000 --env-file .env sipvoicemail`.
 
 ## Test Endpoints with Ngrok
 
-SignalWire requires that your webhooks be publicly accessible for them to be used with our services. So, we recommend using [Ngrok](https://ngrok.com/download) to provide an HTTPS URL. In your Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Express server. It will return a secure URL you can copy for the next step.
+SignalWire requires that your webhooks be publicly accessible for them to be used with our services. So, we recommend using [Ngrok](https://ngrok.com/download) to provide an HTTPS URL for testing. In your Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Express server. It will return a secure URL you can copy for the next step.
 
 ## Configure a Number to Accept Incoming Calls
 
 In your SignalWire Dashboard, you can purchase a phone number and edit its settings to direct calls to the Ngrok URL. The settings for your phone number of choice will look something like this:
 
-![](./screenshot)
+![](./ngrok-webhook-config.png)
 
 With your server and Ngrok running, you should now be able to dial this number and test this example.
 

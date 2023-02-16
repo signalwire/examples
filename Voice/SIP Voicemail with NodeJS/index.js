@@ -34,11 +34,21 @@ app.post("/voicemail", (req, res) => {
     response.record({
       transcribe: true,
       action: "/hangup",
-      transcribeCallback: "/hangup",
+      transcribeCallback: "/endTranscription",
     });
   }
   res.set("Content-Type", "text/xml");
   res.send(response.toString());
+});
+
+/**
+ * This route returns the transcription text.
+ */
+app.post("/endTranscription", (req, res) => {
+  if (req.body.TranscriptionText) {
+    console.log("Transcription text:", req.body.TranscriptionText);
+    console.log("RecordingSID:", req.body.RecordingSid);
+  }
 });
 
 /**
@@ -47,13 +57,10 @@ app.post("/voicemail", (req, res) => {
  * Then the call is ended.
  */
 app.post("/hangup", (req, res) => {
-  if (req.body.TranscriptionText) {
-    console.log("Transcription text:", req.body.TranscriptionText);
-  }
   if (req.body.RecordingUrl) {
     console.log("Recording Url:", req.body.RecordingUrl);
   }
-  let response = new RestClient.LaML.VoiceResponse();
+  const response = new RestClient.LaML.VoiceResponse();
   response.hangup();
   res.set("Content-Type", "text/xml");
   res.send(response.toString());

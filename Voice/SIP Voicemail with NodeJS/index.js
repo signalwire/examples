@@ -32,9 +32,7 @@ app.post("/voicemail", (req, res) => {
     // If the status is not "completed" the call was not answered.
     response.say("The agent is currently unavailable, please leave a message.");
     response.record({
-      transcribe: true,
       action: "/hangup",
-      transcribeCallback: "/endTranscription",
     });
   }
   res.set("Content-Type", "text/xml");
@@ -42,18 +40,8 @@ app.post("/voicemail", (req, res) => {
 });
 
 /**
- * This route returns the transcription text.
- */
-app.post("/endTranscription", (req, res) => {
-  if (req.body.TranscriptionText) {
-    console.log("Transcription text:", req.body.TranscriptionText);
-    console.log("RecordingSID:", req.body.RecordingSid);
-  }
-});
-
-/**
  * This hangup route receives the recording response.
- * This is where you will put your logic to access the transcription and recording.
+ * This is where you will put your logic to access the recording.
  * Then the call is ended.
  */
 app.post("/hangup", (req, res) => {

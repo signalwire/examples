@@ -24,6 +24,6 @@ With your server and Ngrok running, you should now be able to dial this number a
 
 ## Code Walkthrough
 
-Read the full walkthrough in the [SIP Voicemail]() guide.
+Read the full walkthrough in the [SIP Voicemail](https://developer.signalwire.com/guides/sip-voicemail) guide.
 
 For an example of a full IVR with Voicemail using the Node.js Compatibility SDK, see [Voicemails to Email IVR](../Voicemails%20to%20Email%20IVR%20with%20NodeJS/). Although that example dials numbers, you can easily substitute SIP endpoints as we did here.

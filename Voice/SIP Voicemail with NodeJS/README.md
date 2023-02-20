@@ -18,7 +18,7 @@ SignalWire requires that your webhooks be publicly accessible for them to be use
 
 In your SignalWire Dashboard, you can purchase a phone number and edit its settings to direct calls to the Ngrok URL. The settings for your phone number of choice will look something like this:
 
-![](./ngrok-webhook-config.png)
+![phone number configuration in SignalWire dashboard](./ngrok-webhook-config.png)
 
 With your server and Ngrok running, you should now be able to dial this number and test this example.
 

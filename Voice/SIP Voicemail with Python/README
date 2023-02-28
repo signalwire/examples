@@ -1,0 +1,7 @@
+# SIP Voicemail
+
+```
+pipenv install
+pipenv run dev
+ngrok http 5000
+```

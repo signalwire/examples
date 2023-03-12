@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, IconButton, Typography } from "@mui/material";
+import ChatIcon from "@mui/icons-material/Chat";
 import { useStatus, Video } from "@signalwire-community/react";
 import { useLocation } from "react-router-dom";
 import Audience from "./components/Audience";
 import AudienceCount from "./components/AudienceCount";
 import CameraButton from "./components/CameraButton";
+import BroadcastButton from "./components/BroadcastButton";
 import LeaveButton from "./components/LeaveButton";
 import Members from "./components/Members";
 import MicrophoneButton from "./components/MicrophoneButton";
@@ -97,6 +99,18 @@ export default function InCall() {
           </>
         )}
       </div>
+      <div className={style.chat}>
+        <IconButton
+          aria-label="chat"
+          size="large"
+          style={{ height: 100, width: 100 }}
+        >
+          <ChatIcon
+            fontSize="large"
+            style={{ height: 75, width: 75, color: "#90caf9" }}
+          />
+        </IconButton>
+      </div>
       <div className={style.bottombar}>
         {active && (
           <div>
@@ -105,6 +119,10 @@ export default function InCall() {
               <>
                 <CameraButton roomSession={roomSession} />
                 <MicrophoneButton roomSession={roomSession} />
+                <Typography style={{ fontWeight: "bold", paddingTop: 10 }}>
+                  Broadcast
+                </Typography>
+                <BroadcastButton />
               </>
             )}
             {memberType === "audience" && (
@@ -112,7 +130,7 @@ export default function InCall() {
                 variant="contained"
                 onClick={() => askPromotion(roomSession.memberId, userName)}
               >
-                Ask Promotion
+                Request Promotion
               </Button>
             )}
           </div>

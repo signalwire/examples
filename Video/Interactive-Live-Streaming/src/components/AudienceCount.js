@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 export default function AudienceCount({ roomSession }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(500);
 
   useEffect(() => {
     if (!roomSession) return;
 
     const onAudienceCount = (e) => {
-      setCount(e.total);
+      setCount(500 + e.total);
     };
     roomSession.on("room.audience_count", onAudienceCount);
 

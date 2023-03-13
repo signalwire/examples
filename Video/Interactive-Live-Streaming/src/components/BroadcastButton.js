@@ -12,13 +12,14 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import { SvgIcon } from "@mui/material";
+import { SvgIcon, Typography } from "@mui/material";
 
 export default function SplitButton() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [buttonColor, setButtonColor] = React.useState(true);
+  const [alert, setAlert] = React.useState(false);
   const options = [
     { name: "YouTube", icon: <YouTubeIcon /> },
     { name: "Facebook", icon: <FacebookIcon /> },
@@ -51,6 +52,7 @@ export default function SplitButton() {
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex].name}`);
     setButtonColor(!buttonColor);
+    setAlert(!alert);
   };
 
   const handleMenuItemClick = (event, index) => {
@@ -92,6 +94,11 @@ export default function SplitButton() {
           <ArrowDropDownIcon />
         </Button>
       </ButtonGroup>
+      {alert ? (
+        <Typography style={{ fontWeight: "bold", paddingTop: 10 }}>
+          🔴 Broadcast in session...
+        </Typography>
+      ) : null}
       <Popper
         sx={{
           zIndex: 1,

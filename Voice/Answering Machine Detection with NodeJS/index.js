@@ -3,7 +3,7 @@ dotenv.config();
 import express from "express";
 import { RestClient } from "@signalwire/compatibility-api";
 const client = RestClient(process.env.PROJECT_ID, process.env.API_TOKEN, {
-  signalwireSpaceUrl: process.env.SIGNALWIRE_SPACE_URL,
+  signalwireSpaceUrl: process.env.SPACE_URL,
 });
 
 const app = express();
@@ -20,6 +20,10 @@ client.calls.create({
   url: process.env.SERVER_URL,
   to: process.env.CUSTOMER_NUMBER,
   from: process.env.SW_NUMBER,
+  /**
+   *  We will use the DetectMessageEnd value for machine detection
+   * so our application can wait for the end of a voicemail message before playing a message.
+   */
   machineDetection: "DetectMessageEnd",
   machineDetectionTimeout: 45,
 });

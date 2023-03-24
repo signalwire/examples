@@ -1,5 +1,8 @@
 # Voice Guides
 
+[Answering Machine Detection with NodeJS](./Answering%20Machine%20Detection%20with%20NodeJS/)  
+Enable Answering Maching Detection on an outbound call using NodeJS with the Compatibility SDK. The detection will determine if the call is answered by a human or a machine. If it detects a machine, it will play a message. If it detects a human, it will connect the call to a representative, or record a voicemail if the representative is unavailable.
+
 [Answering Machine Detection with Ruby](./Answering%20Machine%20Detection%20with%20Ruby/)  
 In Ruby, you can set up Answering Machine Detection when initiating a call. The detection will determine if the call is answered by a human or a machine. If it detects a machine, it will pause and then play a message. If it detects a human, it will connect the call to a representative.
 

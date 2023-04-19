@@ -5,5 +5,5 @@ COPY Pipfile Pipfile.lock ./
 RUN pip install pipenv && pipenv install
 COPY . .
 
-EXPOSE 5000
+EXPOSE 3000
 CMD ["pipenv", "run","python", "index.py"]

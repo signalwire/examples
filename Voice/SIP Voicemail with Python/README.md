@@ -19,12 +19,12 @@ The Compatibility SDK will pull these environmental variables from the `.env`
 file without any import statement as long as the `.env` file is in the same
 parent directory.
 
-## Run Your Express Server
+## Run Your Flask Server
 
 This example serves our webhooks using a
 [Flask](https://flask.palletsprojects.com/en/2.2.x/installation/) server. After
 your environmental variables are set, you can install dependencies with
-`pipenv install` then start the Express server with `pipenv run dev`. If you
+`pipenv install` then start the Flask server with `pipenv run dev`. If you
 prefer to use Docker, build the image with `docker build -t sipvoicemail .` and
 run it with `docker run --p 3000:3000 --env-file .env sipvoicemail`.
 
@@ -33,7 +33,7 @@ run it with `docker run --p 3000:3000 --env-file .env sipvoicemail`.
 SignalWire requires that your webhooks be publicly accessible for them to be
 used with our services. So, we recommend using
 [Ngrok](https://ngrok.com/download) to provide an HTTPS URL for testing. In your
-Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Express
+Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Flask
 server. It will return a secure URL you can copy for the next step.
 
 ## Configure a Number to Accept Incoming Calls

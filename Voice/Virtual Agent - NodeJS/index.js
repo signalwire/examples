@@ -27,7 +27,7 @@ app.post("/", (req, res) => {
 });
 
 app.post("/response", (req, res) => {
-  console.log(res.body);
+  console.log(req.body);
 });
 
 app.listen(process.env.PORT || 3000, () => {

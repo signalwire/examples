@@ -2,7 +2,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import { RestClient } from "@signalwire/compatibility-api";
-const weatherApiKey = process.env.WEATHERAPI;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -27,50 +26,48 @@ app.post("/", (req, res) => {
 
   const swaig = agent.swaig();
 
-  const getWeather = swaig.function({ name: "get_weather" });
-  getWeather.setPurpose(
-    "use when inquired about weather anywhere around the world"
-  );
-  const where = getWeather.setArgument(
-    "The location or name of the city to get the weather for"
-  );
-  getWeather.setWebHookURL(
-    `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${where}&aqi=no`
+  const transferFn = swaig.function({ name: "transfer" });
+  transferFn.setPurpose("TO DO");
+  transferFn.setArgument("TO DO: the number to call in std format");
+  transferFn.setWebHookURL(
+    `https://b66f5d6f3366.ngrok.app/function?CallSid=${encodeURIComponent(
+      req.body.CallSid
+    )}`
   );
 
-  const getTime = swaig.function({ name: "get_time" });
-  getTime.setPurpose(
-    "use when asked for the current time for a particular location"
-  );
-  const timeLocation = getTime.setArgument(
-    "The location or name of the city to get the time for"
-  );
-  getTime.setWebHookURL(
-    `http://api.weatherapi.com/v1/timezone.json?key=${weatherApiKey}&q=${timeLocation}`
-  );
-
-  // const transfer = swaig.function({ name: "transfer" });
-  // transfer.setPurpose("use this when a request for a transfer is made");
-  // transfer.setArgument("The 10-digit phone number");
-  // transfer.setWebHookURL("");
-  // transfer.setWebHookAuthUser("");
-  // transfer.setWebHookAuthPass("");
-
-  // const sendSMS = swaig.function({ name: "send_sms" });
-  // sendSMS.setPurpose("To send a message to a number over SMS");
-  // sendSMS.setArgument(
-  //   "<number>:<message> where <number> is the phone number to send a message to, either 10 or 11 digits and <message> is the body of the message"
-  // );
-  // sendSMS.setWebHookURL("");
-  // sendSMS.setWebHookAuthUser("");
-  // sendSMS.setWebHookAuthPass("");
+  console.log(response.toString());
 
   res.set("Content-Type", "text/xml");
   res.send(response.toString());
 });
 
-app.post("/response", (req, res) => {
+app.post("/function", (req, res) => {
   console.log(req.body);
+  const callSid = req.query.CallSid;
+
+  if (req.body.function === "transfer") {
+    // curl -L -X POST "https://undefined.signalwire.com/api/laml/2010-04-01/Accounts/PROJECT_ID/Calls/${encodeURIComponent(callSid)}" \
+    // -H 'Content-Type: application/x-www-form-urlencoded' \
+    // -H 'Accept: application/json' \
+    // -u 'projectid:token' \
+    // --data-urlencode "Url=https://b66f5d6f3366.ngrok.app/transfer?number=${encodeURIComponent(req.body.argument)}" \
+    // --data-urlencode 'Method=POST'
+
+    res.json({ response: "connecting" });
+  }
+});
+
+app.post("/transfer", (req, res) => {
+  const number = req.query.number;
+
+  const response = new RestClient.LaML.VoiceResponse();
+  dial = response.dial();
+  dial.number(number);
+
+  console.log(response.toString());
+
+  res.set("Content-Type", "text/xml");
+  res.send(response.toString());
 });
 
 app.listen(process.env.PORT || 3000, () => {

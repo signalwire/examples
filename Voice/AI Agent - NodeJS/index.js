@@ -86,9 +86,6 @@ app.post("/function", (req, res) => {
       }
     );
 
-    console.log(response.toString());
-    res.set("Content-Type", "text/xml");
-    res.send(response.toString());
     res.json({ response: "connecting" });
   }
 });

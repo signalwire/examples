@@ -87,6 +87,8 @@ app.post("/function", (req, res) => {
     );
 
     res.json({ response: "connecting" });
+  } else {
+    res.json({ response: "function not implemented" });
   }
 });
 

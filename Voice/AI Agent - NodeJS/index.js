@@ -43,7 +43,7 @@ app.post("/", (req, res) => {
   const transferFn = swaig.function({ name: "transfer" });
   transferFn.setPurpose("use this when a request for a transfer is made");
   transferFn.setArgument(
-    "the 10-digit phone number that matches the name given in the transfer request"
+    'the 10-digit phone number that matches the name given in the transfer request, in JSON format. Example: {"number": "<number>"}'
   );
   transferFn.setWebHookURL(
     `${host}/function?CallSid=${encodeURIComponent(req.body.CallSid)}`
@@ -56,14 +56,12 @@ app.post("/", (req, res) => {
 });
 
 app.post("/function", (req, res) => {
-  console.log("function endpoint hit: " + req.body);
+  console.log("function endpoint hit: " + JSON.stringify(req.body, null, 2));
   const callSid = req.query.CallSid;
 
   if (req.body.function === "transfer") {
     fetch(
-      `https://${
-        process.env.SIGNALWIRE_SPACE_URL
-      }/api/laml/2010-04-01/Accounts/${
+      `https://${process.env.SPACE_URL}/api/laml/2010-04-01/Accounts/${
         process.env.PROJECT_ID
       }/Calls/${encodeURIComponent(callSid)}`,
       {
@@ -72,14 +70,13 @@ app.post("/function", (req, res) => {
           Authentication:
             "Basic" +
             Buffer.from(
-              process.env.PROJECT_ID + ":" + process.env.API_TOKEN,
-              "base64"
-            ),
+              process.env.PROJECT_ID + ":" + process.env.API_TOKEN
+            ).toString("base64"),
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           Url: `${host}/transfer?number=${encodeURIComponent(
-            req.body.argument
+            req.body.argument.parsed.number
           )}`,
           Method: "POST",
         }),

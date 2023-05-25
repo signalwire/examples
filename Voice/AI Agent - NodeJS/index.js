@@ -55,12 +55,12 @@ app.post("/", (req, res) => {
   res.send(response.toString());
 });
 
-app.post("/function", (req, res) => {
+app.post("/function", async (req, res) => {
   console.log("function endpoint hit: " + JSON.stringify(req.body, null, 2));
   const callSid = req.query.CallSid;
 
   if (req.body.function === "transfer") {
-    fetch(
+    const result = await fetch(
       `https://${process.env.SPACE_URL}/api/laml/2010-04-01/Accounts/${
         process.env.PROJECT_ID
       }/Calls/${encodeURIComponent(callSid)}`,
@@ -68,20 +68,34 @@ app.post("/function", (req, res) => {
         method: "POST",
         headers: {
           Authentication:
-            "Basic" +
+            "Basic " +
             Buffer.from(
-              process.env.PROJECT_ID + ":" + process.env.API_TOKEN
+              process.env.PROJECT_ID + "x:" + process.env.API_TOKEN
             ).toString("base64"),
-          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
+        body: new URLSearchParams({
           Url: `${host}/transfer?number=${encodeURIComponent(
-            req.body.argument.parsed.number
+            req.body.argument.parsed.number ??
+              req.body.argument.parsed[0].number
           )}`,
           Method: "POST",
         }),
       }
     );
+    console.log(result);
+    console.log({
+      Url: `${host}/transfer?number=${encodeURIComponent(
+        req.body.argument.parsed[0].number
+      )}`,
+      Method: "POST",
+    });
+
+    if (result.status !== 200) {
+      res.json({ response: "failed connecting" });
+      return;
+    }
 
     res.json({ response: "connecting" });
   } else {

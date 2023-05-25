@@ -67,7 +67,7 @@ app.post("/function", async (req, res) => {
       {
         method: "POST",
         headers: {
-          Authentication:
+          Authorization:
             "Basic " +
             Buffer.from(
               process.env.PROJECT_ID + ":" + process.env.API_TOKEN

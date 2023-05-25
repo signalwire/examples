@@ -70,7 +70,7 @@ app.post("/function", async (req, res) => {
           Authentication:
             "Basic " +
             Buffer.from(
-              process.env.PROJECT_ID + "x:" + process.env.API_TOKEN
+              process.env.PROJECT_ID + ":" + process.env.API_TOKEN
             ).toString("base64"),
           Accept: "application/json",
           "Content-Type": "application/x-www-form-urlencoded",

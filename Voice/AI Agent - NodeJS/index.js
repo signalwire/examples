@@ -108,7 +108,7 @@ app.post("/transfer", (req, res) => {
   const number = req.query.number;
 
   const response = new RestClient.LaML.VoiceResponse();
-  dial = response.dial();
+  const dial = response.dial();
   dial.number(number);
 
   console.log(response.toString());

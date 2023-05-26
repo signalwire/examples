@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 dotenv.config();
 import express from "express";
 import { RestClient } from "@signalwire/compatibility-api";
-const host = "https://a64c6d6107f3.ngrok.app";
+const host = process.env.HOST_APP;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -104,7 +104,7 @@ app.post("/transfer", (req, res) => {
   dial.number(number);
 
   console.log(
-    "Transfer request initiated with XML instructions: " + response.toString()
+    `Transferring to ${number} with XML instructions: ` + response.toString()
   );
 
   res.set("Content-Type", "text/xml");
@@ -113,7 +113,13 @@ app.post("/transfer", (req, res) => {
 
 app.post("/summary", (req, res) => {
   console.log("Call from " + req.body.caller_id_number);
-  console.log(req.body.post_prompt_data.parsed[0]);
+  if (req.body.post_prompt_data.parsed) {
+    console.log(req.body.post_prompt_data.parsed[0]);
+  } else if (req.body.post_prompt_data) {
+    console.log(req.body.post_prompt_data);
+  } else {
+    console.log("AI agent did not record a message.");
+  }
 });
 
 app.listen(process.env.PORT || 3000, () => {

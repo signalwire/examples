@@ -31,15 +31,12 @@ app.post("/", (req, res) => {
     | --------| --------------- |
     | Sales   | 12057937849     |
     | Support | 19379028398     |
-    If the caller would like to leave a message for the CEO, ask for their phone number and message. 
+    If the caller would like to leave a message for the CEO, ask for their message. 
     After collecting the message, do not wait for the user to end the conversation: say goodbye and hang up the call. 
     Be sure to hang up the call at the end of every conversation.`
   );
-  agent.postPrompt(`Summarize the call with a valid anonymous json object by replacing the uppercase placeholders in one of the following templates with the caller information.
-  If the caller leaves a message:
-  {"contact_info": {"name": "CONTACT_NAME","number": "CONTACT_PHONE"}, "message": "MESSAGE"}
-  If the caller requests a transfer:
-  {"caller": "CONTACT_NAME", "transferred_to": "TRANSFER PHONE NUMBER"}`);
+  agent.postPrompt(`Return a valid anonymous json object by replacing the uppercase placeholders in the following template with the caller's information.
+  {"contact_name": "CONTACT_NAME", "message": "MESSAGE or TRANSFERRED"}`);
 
   const swaig = agent.swaig();
 
@@ -115,8 +112,8 @@ app.post("/transfer", (req, res) => {
 });
 
 app.post("/summary", (req, res) => {
-  console.log(req.body.post_prompt_data);
-  // console.log(`Call summary: ${req.body.post_prompt_data.parsed[0]}`);
+  console.log("Call from " + req.body.caller_id_number);
+  console.log(req.body.post_prompt_data.parsed[0]);
 });
 
 app.listen(process.env.PORT || 3000, () => {

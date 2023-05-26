@@ -15,7 +15,7 @@ app.post("/", (req, res) => {
   const agent = connect.ai({
     voice: "en-US-Neural2-D",
   });
-  agent.setPostPromptURL(host + "/response");
+  agent.setPostPromptURL(host + "/summary");
   agent.prompt(
     {
       confidence: 0.4,
@@ -24,19 +24,22 @@ app.post("/", (req, res) => {
     `You are the CEO's assistant.
     Your job is to answer phone calls and collect messages or transfer the caller to a human agent. 
     The CEO is not available now. Offer to take a message or transfer the caller to live agent.
+    Request the caller's name.
     You are able to transfer a call to support or sales. 
-    Here is a list of known numbers that you can transfer the caller to. Do not ask the caller for these numbers. Just transfer to the caller.
+    Here is a list of known numbers that you can transfer the caller to. Do not ask the caller for these numbers. Just transfer the caller by using the appropriate function. 
     | Name    | Phone Number    |
     | --------| --------------- |
     | Sales   | 12057937849     |
-    | Support | 12057966865     |
-    If the caller would like to leave a message for the CEO, ask for the user's name, phone number, and their message. 
+    | Support | 19379028398     |
+    If the caller would like to leave a message for the CEO, ask for their phone number and message. 
     After collecting the message, do not wait for the user to end the conversation: say goodbye and hang up the call. 
     Be sure to hang up the call at the end of every conversation.`
   );
-  agent.postPrompt(`If the caller chooses to leave a message, summarize the message as a valid anonymous json object by filling the upper case placeholders in this template:
+  agent.postPrompt(`Summarize the call with a valid anonymous json object by replacing the uppercase placeholders in one of the following templates with the caller information.
+  If the caller leaves a message:
   {"contact_info": {"name": "CONTACT_NAME","number": "CONTACT_PHONE"}, "message": "MESSAGE"}
-  If you use the transfer function, summarize your conversation including the phone number you transferred to.`);
+  If the caller requests a transfer:
+  {"caller": "CONTACT_NAME", "transferred_to": "TRANSFER PHONE NUMBER"}`);
 
   const swaig = agent.swaig();
 
@@ -49,14 +52,14 @@ app.post("/", (req, res) => {
     `${host}/function?CallSid=${encodeURIComponent(req.body.CallSid)}`
   );
 
-  console.log("got the prompt");
+  console.log("AI agent handling new incoming call.");
 
   res.set("Content-Type", "text/xml");
   res.send(response.toString());
 });
 
 app.post("/function", async (req, res) => {
-  console.log("function endpoint hit: " + JSON.stringify(req.body, null, 2));
+  console.log(`AI agent has invoked the ${req.body.function} function`);
   const callSid = req.query.CallSid;
 
   if (req.body.function === "transfer") {
@@ -84,41 +87,36 @@ app.post("/function", async (req, res) => {
         }),
       }
     );
-    console.log(result);
-    console.log({
-      Url: `${host}/transfer?number=${encodeURIComponent(
-        req.body.argument.parsed[0].number
-      )}`,
-      Method: "POST",
-    });
 
     if (result.status !== 200) {
-      res.json({ response: "failed connecting" });
+      res.json({ response: "Connection failed." });
       return;
     }
 
-    res.json({ response: "connecting" });
+    res.json({ response: "Connecting..." });
   } else {
-    res.json({ response: "function not implemented" });
+    res.json({ response: "Function not implemented" });
   }
 });
 
 app.post("/transfer", (req, res) => {
-  console.log("transfer endpoint hit");
   const number = req.query.number;
 
   const response = new RestClient.LaML.VoiceResponse();
   const dial = response.dial();
   dial.number(number);
 
-  console.log(response.toString());
+  console.log(
+    "Transfer request initiated with XML instructions: " + response.toString()
+  );
 
   res.set("Content-Type", "text/xml");
   res.send(response.toString());
 });
 
-app.post("/response", (req, res) => {
-  console.log(req.body);
+app.post("/summary", (req, res) => {
+  console.log(req.body.post_prompt_data);
+  // console.log(`Call summary: ${req.body.post_prompt_data.parsed[0]}`);
 });
 
 app.listen(process.env.PORT || 3000, () => {

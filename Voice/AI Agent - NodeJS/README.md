@@ -1,6 +1,6 @@
 # Using SignalWire Conversational AI with Node.js
 
-Artificial Intelligence platforms are increasingly popular and constantly evolving tools that you can leverage when building a Voice application. SignalWire Conversational AI, currently integrated with Open AI, was developed to simulate natural conversations. An AI agent allows businesses to automate routine tasks, handle high volumes of inquiries, provide instant support 24/7, and offer consistent and accurate information to customers. This example will implement a conversational AI agent with the [Compatibility SDK with Node.js](https://docs.signalwire.com/reference/compatibility-sdks/v3/#compatibility-rest-api-client-libraries-and-sdks-nodejs). Clone this repo to start testing and adapting SignalWire Conversational AI to meet your needs.
+Artificial Intelligence platforms are increasingly popular and constantly evolving tools that you can leverage when building a Voice application. SignalWire Conversational AI, currently integrated with OpenAI, was developed to simulate natural conversations. An AI agent allows businesses to automate routine tasks, handle high volumes of inquiries, provide instant support 24/7, and offer consistent and accurate information to customers. This example will implement a conversational AI agent with the [Compatibility SDK with Node.js](https://docs.signalwire.com/reference/compatibility-sdks/v3/#compatibility-rest-api-client-libraries-and-sdks-nodejs). Clone this repo to start testing and adapting SignalWire Conversational AI to meet your needs.
 
 ## Setup Your Environment
 
@@ -12,7 +12,7 @@ This example serves our webhooks using an [Express](https://expressjs.com/en/sta
 
 ## Testing with Ngrok
 
-SignalWire requires that your webhooks be publicly accessible for them to be used with our services. So, we recommend using [Ngrok](https://ngrok.com/download) to provide an HTTPS URL for testing. In your Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Express server. It will return a secure URL you can copy for the next step.
+SignalWire requires that your webhooks be publicly accessible for them to be used with our services. So, we recommend using [Ngrok](https://ngrok.com/download) to provide an HTTPS URL for testing. In your Ngrok CLI, run `ngrok http 3000`, where 3000 is the port we set in our Express server. It will return a secure URL you can copy for the next step. You will also add this URL to the `.env` file as the `HOST_APP` to build webhook URLs.
 
 ## Configure a Number to Accept Incoming Calls
 

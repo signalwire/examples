@@ -15,7 +15,7 @@ app.post("/", (req, res) => {
   const agent = connect.ai({
     voice: "en-US-Neural2-D",
   });
-  agent.setPostPromptURL(host + "/summary");
+  agent.setPostPromptURL("/summary");
   agent.prompt(
     {
       confidence: 0.4,

@@ -8,7 +8,7 @@ Copy the contents of `env.example` and save them in a new file called `.env`. Fi
 
 ## Run Your Express Server
 
-This example serves our webhooks using an [Express](https://expressjs.com/en/starter/installing.html) server. After your environmental variables are set, you can install dependencies with `npm install` then start the Express server with `npm run start`. If you prefer to use Docker, build the image with `docker build -t aiagent .` and run it with `docker run --p 3000:3000 --env-file .env aiagent`.
+This example serves our webhooks using an [Express](https://expressjs.com/en/starter/installing.html) server. After your environmental variables are set, you can install dependencies with `npm install` then start the Express server with `npm run start`. If you prefer to use Docker, build the image with `docker build -t aiagent .` and run it with `docker run -p 3000:3000 --env-file .env aiagent`.
 
 ## Testing with Ngrok
 

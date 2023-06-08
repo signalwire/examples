@@ -4,7 +4,7 @@ Artificial Intelligence platforms are increasingly popular and constantly evolvi
 
 ## Setup Your Environment
 
-Copy the contents of `env.example` and save them in a new file called `.env`. Fill in your SignalWire credentials. If you need help finding them, check out our guide to [Navigating Your SignalWire Space](https://developer.signalwire.com/guides/navigating-your-space#api). The Compatibility SDK will pull these environmental variables from the `.env` file without any import statement as long as the `.env` file is in the same parent directory.
+Copy the contents of `env.example` and save them in a new file called `.env`. Fill in your SignalWire credentials. If you need help finding them, check out our guide to [Navigating Your SignalWire Space](https://developer.signalwire.com/guides/navigating-your-space#api). The app will pull these environmental variables from the `.env` file automatically as long as the `.env` file is in the same parent directory.
 
 ## Run Your Express Server
 

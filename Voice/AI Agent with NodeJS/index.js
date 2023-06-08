@@ -9,6 +9,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const ADDRESS_BOOK = {
+  sales: process.env.SALES_NUMBER,
+  support: process.env.SUPPORT_NUMBER,
+};
+
 // This route contains all of the information the AI agent will need for the conversation.
 app.post("/", (req, res) => {
   const response = new RestClient.LaML.VoiceResponse();
@@ -29,18 +34,14 @@ app.post("/", (req, res) => {
     The CEO is not available now. Offer to take a message or transfer the caller to live agent.
     Request the caller's name.
     You are able to transfer a call to support or sales. 
-    Here is a list of known numbers that you can transfer the caller to. Do not ask the caller for these numbers. Just transfer the caller by using the appropriate function. 
-    | Name    | Phone Number      |
-    | --------| ----------------- |
-    | Sales   | ${SALES_NUMBER}   |
-    | Support | ${SUPPORT_NUMBER} |
+    Here is a list of departments that you can transfer the caller to: "Sales", "Support". Transfer the caller by using the appropriate function. 
     If the caller would like to leave a message for the CEO, ask for their message. 
     After collecting the message, do not wait for the user to end the conversation: say goodbye and hang up the call. 
     Be sure to hang up the call at the end of every conversation.`
   );
   // Instruct the AI agent on what information to send about this call when it is complete.
   agent.postPrompt(`Return a valid anonymous json object by replacing the uppercase placeholders in the following template with the caller's information.
-  {"contact_name": "CONTACT_NAME", "message": "MESSAGE or TRANSFERRED"}`);
+  {"contact_name": "CONTACT_NAME", "message": "MESSAGE"}`);
 
   // SWAIG allows us to define custom external functions for the AI agent to use. Name, purpose, argument, and webhook should be set as follows.
   const swaig = agent.swaig();
@@ -49,7 +50,7 @@ app.post("/", (req, res) => {
   const transferFn = swaig.function({ name: "transfer" });
   transferFn.setPurpose("use this when a request for a transfer is made");
   transferFn.setArgument(
-    'the 10-digit phone number that matches the name given in the transfer request, in JSON format. Example: {"number": "<number>"}'
+    'The destination to transfer to, in JSON format. Example: {"destination": "<destination>"}. Allowed values: "sales", "support".'
   );
   transferFn.setWebHookURL(
     `${host}/function?CallSid=${encodeURIComponent(req.body.CallSid)}`
@@ -67,6 +68,19 @@ app.post("/function", async (req, res) => {
   const callSid = req.query.CallSid;
 
   if (req.body.function === "transfer") {
+    // Get the destination name from the parameters (either "sales" or "support")
+    const destination =
+      req.body.argument.parsed.destination ??
+      req.body.argument.parsed[0].destination;
+
+    // Convert the destination name to a phone number
+    const destNumber = ADDRESS_BOOK[destination.toLowerCase()];
+    if (!destNumber) {
+      res.json({ response: "Unknown destination." });
+      return;
+    }
+
+    // Update the in-progress call to transfer to the requested number
     const result = await fetch(
       `https://${process.env.SPACE_URL}/api/laml/2010-04-01/Accounts/${
         process.env.PROJECT_ID
@@ -83,10 +97,7 @@ app.post("/function", async (req, res) => {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          Url: `${host}/transfer?number=${encodeURIComponent(
-            req.body.argument.parsed.number ??
-              req.body.argument.parsed[0].number
-          )}`,
+          Url: `${host}/transfer?number=${encodeURIComponent(destNumber)}`,
           Method: "POST",
         }),
       }

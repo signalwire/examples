@@ -24,4 +24,4 @@ With your server and Ngrok running, you should now be able to dial this number a
 
 ## Code Walkthrough
 
-Read the full walkthrough in the [Conversational AI](https://developer.signalwire.com/guides/conversational-ai) guide.
+Read the full walkthrough in the [Conversational AI](https://developer.signalwire.com/guides/voice/conversational-ai-example) guide.

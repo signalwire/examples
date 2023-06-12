@@ -1,7 +1,7 @@
 # Voice Guides
 
 [Answering Machine Detection with NodeJS](./Answering%20Machine%20Detection%20with%20NodeJS/)  
-Enable Answering Maching Detection on an outbound call using NodeJS with the Compatibility SDK. The detection will determine if the call is answered by a human or a machine. If it detects a machine, it will play a message. If it detects a human, it will connect the call to a representative, or record a voicemail if the representative is unavailable.
+Enable Answering Machine Detection on an outbound call using NodeJS with the Compatibility SDK. The detection will determine if the call is answered by a human or a machine. If it detects a machine, it will play a message. If it detects a human, it will connect the call to a representative, or record a voicemail if the representative is unavailable.
 
 [Answering Machine Detection with Ruby](./Answering%20Machine%20Detection%20with%20Ruby/)  
 In Ruby, you can set up Answering Machine Detection when initiating a call. The detection will determine if the call is answered by a human or a machine. If it detects a machine, it will pause and then play a message. If it detects a human, it will connect the call to a representative.
@@ -17,6 +17,9 @@ This demo call center adds features to the [Dynamic IVR](./Build%20a%20Dynamic%2
 
 [Coaching and Recording with NodeJS](./Implement%20Coaching%20and%20Recording%20with%20NodeJS/)  
 Implement Coaching and Recording with Node.js. Coaching will connect a call to an in-progress conference so a supervisor can join a recorded conference call in progress between an agent and a customer.
+
+[Conversational AI with NodeJS](./AI%20Agent%20-%20NodeJS/)  
+Set up an AI assistant to answer calls, transfer callers to another number, and take messages which are returned as JSON.
 
 [Dial by Voice with Python](./Dial%20By%20Voice%20Python/)  
 This Python application will prompt the caller for a phone number via speech input and connect to the phone number recognized using ASR providing an additional level of accessibility for users.

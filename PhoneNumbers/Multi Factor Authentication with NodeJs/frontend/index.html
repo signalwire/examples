@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Getting started</title>
+    <!-- CSS only -->
+    <link href="js/bootstrap.min.css" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+
+    <div id="form-otp" class="p-5 mx-auto" action="" method="post">
+
+        <h5>NodeJs Multi-Factor Authentication use case</h5>
+        <!--        {{message}}-->
+        <!--            <p>Enter a Phone number to initialize 2-factor Authentication</p>-->
+
+        <div class="form-group">
+            <label id="name" class="mt-3 mb-3">Enter a Phone number</label>
+            <input type="text" name="phonenumber" class="form-control" id="phone_number"
+                   placeholder="Example +164xxxxxxxxx">
+        </div>
+
+        <p class="mt-3 mb-3">How would you like to receive the token?</p>
+
+        <div id="selections">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="sms_option" value="sms">
+                <label class="form-check-label" for="sms_option">
+                    SMS
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="voice_option" value="voice">
+                <label class="form-check-label" for="voice_option">
+                    Voice call
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group pt-3">
+            <input type="submit" onclick="submitPhone()" value="Send code" class="btn btn-success">
+        </div>
+
+        <p id="loading" class="m-3 p-3 bg-warning" style="display: none">Loading</p>
+
+    </div>
+
+    <div id="form-validation" class="p-5 mx-auto" action="" style="display: none" method="post">
+
+        <h3>Enter the verification code sent to <span id="phoneNumber"></span></h3>
+
+        <div class="form-group">
+            <input type="number" name="otp_token" style="text-align: center" class="form-control" id="otp_token"
+                   placeholder="******">
+        </div>
+
+        <div class="row pt-3 mx-auto">
+            <input type="submit" onclick="verifyToken()" value="Verify code" class="btn btn-success">
+        </div>
+
+    </div>
+
+    <div class="form-completion row text-center" id="completed">
+        <img src="img/completed.png" height="500px">
+        <h3 class="text-success">Your Two factor authentication was successful!</h3>
+        <p id="message"></p>
+    </div>
+
+</div>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/vue.min.js"></script>
+
+<script type="application/javascript">
+
+    document.getElementById("completed").style.display = "none"
+
+    function submitPhone() {
+        let phone = document.getElementById("phone_number").value
+        let selection = document.getElementById("selections").value;
+
+
+        if (phone.length < 10) {
+            alert("Enter a valid phone number")
+            return
+        } else if (phone == "") {
+            alert("Phone number is required")
+            return;
+        } else {
+
+            document.getElementById("loading").style.display = "block"
+
+            if (document.getElementById('sms_option').checked) {
+                selection = document.getElementById('sms_option').value
+            } else {
+                selection = document.getElementById('voice_option').value
+            }
+
+            if (selection === "sms") {
+                axios.post("/api/send-sms", {phoneNumber: phone}).then((response) => {
+                    document.getElementById("loading").style.display = "none"
+                    if (response.status === 200) {
+                        document.getElementById("form-otp").style.display = "none"
+                        document.getElementById("form-validation").style.display = "block"
+                    } else {
+                        alert(response.data.message)
+                    }
+                }, error => {
+                    document.getElementById("loading").style.display = "none"
+                    alert(error.message)
+                })
+            } else {
+                axios.post("/api/voice", {phoneNumber: phone}).then((response) => {
+                    document.getElementById("loading").style.display = "none"
+                    if (response.status === 200) {
+                        document.getElementById("form-otp").style.display = "none"
+                        document.getElementById("form-validation").style.display = "block"
+                    } else {
+                        alert(response.data.message)
+                    }
+                }, error => {
+                    document.getElementById("loading").style.display = "none"
+                })
+            }
+
+        }
+
+    }
+
+    function verifyToken() {
+        let token = document.getElementById("otp_token").value
+
+        if (token === "") {
+            alert("Token is required")
+        } else if (token.length < 6) {
+            alert("ENter a valid token")
+        } else {
+            axios.post("/api/token", {
+                token: token
+            }).then(response => {
+
+                if (response.data.status == 200){
+                    document.getElementById("completed").style.display = "block"
+                    document.getElementById("form-validation").style.display = "none"
+                }else{
+                    alert(response.data.message)
+                }
+            }, error => {
+            })
+        }
+    }
+
+    function showDialog() {
+        document.getElementById("loading").style.display = "block"
+        setTimeout(() => {
+            document.getElementById("loading").style.display = "none"
+        }, 3000)
+    }
+</script>
+</body>
+</html>

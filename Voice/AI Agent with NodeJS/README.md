@@ -1,6 +1,7 @@
-# Using SignalWire Conversational AI with Node.js
 
-Artificial Intelligence platforms are increasingly popular and constantly evolving tools that you can leverage when building a Voice application. SignalWire Conversational AI, currently integrated with OpenAI, was developed to simulate natural conversations. An AI agent allows businesses to automate routine tasks, handle high volumes of inquiries, provide instant support 24/7, and offer consistent and accurate information to customers. This example will implement a conversational AI agent with the [Compatibility SDK with Node.js](https://docs.signalwire.com/reference/compatibility-sdks/v3/#compatibility-rest-api-client-libraries-and-sdks-nodejs). Clone this repo to start testing and adapting SignalWire Conversational AI to meet your needs.
+# Using a SignalWire AI Agent with Node.js
+
+Artificial Intelligence platforms are increasingly popular and constantly evolving tools that you can leverage when building a Voice application. SignalWire Conversational AI, currently integrated with OpenAI, was developed to simulate natural conversations. An AI agent allows businesses to automate routine tasks, handle high volumes of inquiries, provide instant support 24/7, and offer consistent and accurate information to customers. This example will implement a conversational AI agent with the [Compatibility SDK with Node.js](https://docs.signalwire.com/reference/compatibility-sdks/v3/#compatibility-rest-api-client-libraries-and-sdks-nodejs). Clone this repo to start testing and adapting the SignalWire AI Agent to meet your needs.
 
 ## Setup Your Environment
 
@@ -24,4 +25,4 @@ With your server and Ngrok running, you should now be able to dial this number a
 
 ## Code Walkthrough
 
-Read the full walkthrough in the [Conversational AI](https://developer.signalwire.com/guides/voice/conversational-ai-example) guide.
+Read the full walkthrough in the [Conversational AI](https://developer.signalwire.com/guides/voice/signalwire-ai-agent-example) guide.

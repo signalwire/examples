@@ -2,7 +2,7 @@
 
 A demo application that demonstrates how to send an SMS message using the SignalWire Messaging API.
 
-📖 [Read the full guide](https://developer.signalwire.com/apis/docs/send-sms-from-the-browser-using-node-js?relay_version=relayv3)
+📖 [Read the full guide](https://developer.signalwire.com/apis/docs/send-sms-from-the-browser-using-node-js?relay_version=relayv4)
 
 ## Setup
 

@@ -6,7 +6,7 @@ Two Factor Authentication (2FA) can provide your users effective protection agai
 
 ## Required Resources
 
-📖 Read the [full guide](https://developer.signalwire.com/apis/docs/two-factor-authentication?relay_version=relayv3) on our developer portal!
+📖 Read the [full guide](https://developer.signalwire.com/apis/docs/two-factor-authentication?relay_version=relayv4) on our developer portal!
 
 This guide uses SignalWire's [RELAY Realtime SDK](https://developer.signalwire.com/client-sdk/reference/rt-exports).
 

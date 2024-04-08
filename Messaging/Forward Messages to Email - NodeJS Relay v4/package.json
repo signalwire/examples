@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "@signalwire/realtime-api": "^3.0.0",
+    "@signalwire/realtime-api": "^4.0.0-dev.202402151014.073b48d.1",
     "dotenv": "^16.0.0",
     "form-data": "^4.0.0",
     "mailgun.js": "^7.0.0"

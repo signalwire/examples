@@ -1,7 +1,7 @@
 import "dotenv/config";
 import parsePhoneNumber from "libphonenumber-js";
 import axios from "axios";
-import { SignalWire } from "@signalwire/realtime-api";
+import { SignalWire, Voice } from "@signalwire/realtime-api";
 
 const DC_WEATHER_PHONE = "+12025891212";
 const PHONE_NUMBER = process.env.PHONE_NUMBER;
@@ -28,7 +28,7 @@ await voiceClient.listen({
     });
     console.log("Welcome text said");
 
-    await call
+    const ttsInfo = await call
       .promptTTS({
         text: "Please enter 1 for Washington weather, 2 for washington weather message, 3 to play rain dance, 4 to send rain dance.",
         duration: 10,
@@ -36,35 +36,14 @@ await voiceClient.listen({
           max: 1,
           digitTimeout: 15,
         },
-        listen: {
-          onEnded: (event) => {
-            console.log("Prompt TTS ended", event);
-            type = event.type;
-            digits = event.digits;
-            terminator = event.terminator;
-            call.hangup();
-          },
-        },
       })
-      .onStarted();
-
-    call.hangup();
-  },
-});
-
-voiceClient.on("call.received", async (call) => {
-  try {
-    console.log(
-      "Prompted for digits, received digits",
-      type,
-      digits,
-      terminator
-    );
+      .onEnded();
+    const digits = ttsInfo.digits;
 
     if (digits === "1") {
       // User input 1.  We are going to dial a Washington weather
       // number and connect the call.
-      await call.connectPhone({
+      let peer = await call.connectPhone({
         from: call.from,
         to: DC_WEATHER_PHONE,
         timeout: 30,
@@ -74,8 +53,7 @@ voiceClient.on("call.received", async (call) => {
           })
         ),
       });
-      console.log("Connecting to DC weather phone ...");
-      await call.waitUntilConnected();
+      await peer.disconnected();
       console.log("Connected");
     } else if (digits === "2") {
       // User input 2.  We are going to query a weather API, find the weather of Washington,
@@ -94,44 +72,44 @@ voiceClient.on("call.received", async (call) => {
           body: message,
         });
       } catch (e) {
-        const pb = await call.playTTS({
-          text:
-            "Sorry, I couldn't send the message." +
-            (e?.data?.from_number[0] ?? " ") +
-            " I will say the contents here. " +
-            message,
-        });
-        await pb.waitForEnded();
+        await call
+          .playTTS({
+            text:
+              "Sorry, I couldn't send the message." +
+              (e?.data?.from_number[0] ?? " ") +
+              " I will say the contents here. " +
+              message,
+          })
+          .onEnded();
       }
     } else if (digits === "3") {
       //User input 3.  We are going to play a rain dance song hosted on our servers.
       console.log("Sending rain dance song");
-      const rainDance = await call.playAudio({
-        url: "https://swrooms.com/rain.mp3",
-      });
-      await rainDance.waitForEnded();
+      await call
+        .playAudio({
+          url: "https://cdn.signalwire.com/swml/April_Kisses.mp3",
+        })
+        .onEnded();
     } else if (digits === "4") {
       //User input 4.  We are going to ask for a phone number to dial and play a rain dance song to it.
       console.log("Sending rain song to your friend");
-      const prompt = await call.promptTTS({
-        text: "Please enter your friend's number then dial #. Please use the international format, but skip the plus sign.",
-        digits: {
-          max: 15,
-          digitTimeout: 15,
-          terminators: "#",
-        },
-      });
-      const { type, digits, terminator } = await prompt.waitForResult();
-      console.log(
-        "Prompted for digits, received digits",
-        type,
-        digits,
-        terminator
-      );
+      const prompt = await call
+        .promptTTS({
+          text: "Please enter your friend's number then dial #. Please use the international format, but skip the plus sign.",
+          digits: {
+            max: 15,
+            digitTimeout: 15,
+            terminators: "#",
+          },
+        })
+        .onEnded();
+      console.log("Prompted for digits, received digits", prompt.digits);
+
+      let digits = prompt.digits;
 
       let e164number;
-      number = parsePhoneNumber("+" + digits);
-      usnumber = parsePhoneNumber(digits, "US");
+      let number = parsePhoneNumber("+" + digits);
+      let usnumber = parsePhoneNumber(digits, "US");
       if (number && number.isValid()) {
         e164number = number.number;
       } else if (usnumber && usnumber.isValid()) {
@@ -151,10 +129,8 @@ voiceClient.on("call.received", async (call) => {
       }
     }
     console.log("Hanging up");
-    await call.hangup();
-  } catch (error) {
-    console.error("Either call hung up by user, or some other error: ", error);
-  }
+    call.hangup();
+  },
 });
 
 async function callWithRainDance(number) {
@@ -166,10 +142,11 @@ async function callWithRainDance(number) {
       timeout: 30,
     });
     console.log("sending rain dance song");
-    const rainDance = await call.playAudio({
-      url: "https://swrooms.com/rain.mp3",
-    });
-    await rainDance.waitForEnded();
+    await call
+      .playAudio({
+        url: "https://cdn.signalwire.com/swml/April_Kisses.mp3",
+      })
+      .onEnded();
     await call.hangup();
   } catch (e) {
     console.log("Call not answered.", e);

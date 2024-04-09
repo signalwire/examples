@@ -119,8 +119,8 @@ voiceClient.on("call.received", async (call) => {
       );
 
       let e164number;
-      number = parsePhoneNumber("+" + digits);
-      usnumber = parsePhoneNumber(digits, "US");
+      let number = parsePhoneNumber("+" + digits);
+      let usnumber = parsePhoneNumber(digits, "US");
       if (number && number.isValid()) {
         e164number = number.number;
       } else if (usnumber && usnumber.isValid()) {

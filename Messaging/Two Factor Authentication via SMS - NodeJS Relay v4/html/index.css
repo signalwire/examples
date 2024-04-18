@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.body {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form {
+  width: 300px;
+  height: 300px;
+}
+label {
+  width: 100%;
+}
+input {
+  width: 100%;
+}
+button {
+  margin: 3px;
+}
+

@@ -20,4 +20,4 @@ You may also choose to run it on Docker by building the image with `docker build
 
 # Code Walkthrough
 
-Read the full walkthrough on the [Forwarding Texts to Email - Node.js](https://developer.signalwire.com/apis/docs/forwarding-texts-to-email-nodejs?relay_version=relayv3) guide.
+Read the full walkthrough on the [Forwarding Texts to Email - Node.js](https://developer.signalwire.com/apis/docs/forwarding-texts-to-email-nodejs?relay_version=relayv4) guide.

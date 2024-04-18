@@ -8,7 +8,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
-    "@signalwire/realtime-api": "^4.0.0-dev.202402151014.073b48d.1",
+    "@signalwire/realtime-api": "^4.0.0",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "libphonenumber-js": "^1.10.6"

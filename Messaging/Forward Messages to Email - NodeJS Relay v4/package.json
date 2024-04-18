@@ -9,7 +9,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "@signalwire/realtime-api": "^4.0.0-dev.202402151014.073b48d.1",
+    "@signalwire/realtime-api": "^4.0.0",
     "dotenv": "^16.0.0",
     "form-data": "^4.0.0",
     "mailgun.js": "^7.0.0"
